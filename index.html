@@ -92,6 +92,28 @@ body.walking .pad{display:flex}body.walking .hint{display:none}
 .exit{border:0;background:#b4442c;color:#fff;border-radius:10px;padding:9px 14px;font:600 13px Inter,sans-serif;cursor:pointer}
 .where{position:absolute;left:50%;top:60px;transform:translateX(-50%);background:rgba(35,33,29,.82);color:#fff;padding:6px 14px;border-radius:999px;font-size:13px;font-weight:600;display:none;pointer-events:none}
 body.walking .where{display:block}
+.stabs{display:none}
+.phoneOnly{display:none}
+.cur{display:flex;align-items:center;gap:10px;background:var(--accent-soft);border-radius:10px;padding:8px 10px;margin:4px 0 8px;font-size:13px}
+.cur .sw{width:30px;height:30px}
+.cur small{display:block;color:var(--muted);font-size:11.5px}
+.done{display:none;width:100%;margin-top:12px;border:0;background:var(--ink);color:#fff;border-radius:10px;padding:11px;font:600 14px Inter,sans-serif;cursor:pointer}
+@media (max-width:860px){
+  .stabs{display:flex;position:sticky;top:-14px;z-index:2;background:var(--panel);margin:0 -16px 6px;padding:6px 10px;gap:6px;border-bottom:1px solid var(--line)}
+  .stabs button{flex:1;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 4px;font:600 12.5px Inter,sans-serif;color:var(--ink)}
+  .stabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .sec{display:none}.sec.on{display:block}
+  .phoneOnly{display:block}
+  .bar #wallSeg,.bar #viewSeg{display:none}
+  .walkbtn{background:var(--accent)}
+  .sec h3:first-child{margin-top:6px}
+  .done{display:block}
+  aside{height:58%;padding:10px 14px 24px}
+  body.panel-open #view{bottom:58%}
+  .room,.stone{padding:9px 8px;font-size:13px}
+  .chip{padding:8px 12px 8px 7px;font-size:13px}
+  .fseg button{padding:10px 4px}
+}
 @media (max-width:860px){
   header .sub{display:none}
   .app{height:calc(100vh - 46px);height:calc(100dvh - 46px);min-height:420px}
@@ -157,32 +179,54 @@ body.walking .where{display:block}
   </div>
   <aside id="panel">
     <div class="ptop"><b>Options</b><button class="xbtn" id="closePanel" aria-label="Close options">✕</button></div>
-    <h3>1 · Choose a room</h3>
-    <div id="roomList"></div>
-    <h3>2 · Stone for <span id="selLabel"></span></h3>
-    <div id="stoneList"></div>
-    <h3>3 · Colour</h3>
-    <div class="chips" id="variants"></div>
-    <h3>4 · Finish</h3>
-    <div class="fseg" id="finish">
-      <button data-f="polished">Polished</button>
-      <button data-f="honed">Honed / Matt</button>
-      <button data-f="natural">Natural / Anti-skid</button>
+    <div class="cur" id="curSel"></div>
+    <div class="stabs" id="stabs">
+      <button data-s="rooms">1 Room</button><button data-s="stone">2 Stone</button><button data-s="colour">3 Colour</button><button data-s="paint">4 View</button>
     </div>
-    <div class="apply">
-      <button id="applyFloor">Use on every room of this floor</button>
-      <button id="applyHouse">Use on whole house</button>
-    </div>
-    <h3>Wall paint</h3>
-    <div class="group-label" style="margin-top:0">Inside</div>
-    <div class="chips" id="paints"></div>
-    <div class="group-label">Outside</div>
-    <div class="chips" id="extPaints"></div>
-    <h3>Show</h3>
-    <div class="toggles">
-      <label><input type="checkbox" id="tFurn" checked> Furniture</label>
-      <label><input type="checkbox" id="tLedge" checked> 3 ft walkway around first floor</label>
-    </div>
+    <section class="sec" data-sec="rooms">
+      <h3>1 · Choose a room</h3>
+      <div id="roomList"></div>
+    </section>
+    <section class="sec" data-sec="stone">
+      <h3>2 · Stone for <span id="selLabel"></span></h3>
+      <div id="stoneList"></div>
+    </section>
+    <section class="sec" data-sec="colour">
+      <h3>3 · Colour</h3>
+      <div class="chips" id="variants"></div>
+      <h3>Finish</h3>
+      <div class="fseg" id="finish">
+        <button data-f="polished">Polished</button>
+        <button data-f="honed">Honed / Matt</button>
+        <button data-f="natural">Natural / Anti-skid</button>
+      </div>
+      <div class="apply">
+        <button id="applyFloor">Use on every room of this floor</button>
+        <button id="applyHouse">Use on whole house</button>
+      </div>
+      <button class="done" id="doneBtn">✓ Done – show in 3D</button>
+    </section>
+    <section class="sec" data-sec="paint">
+      <div class="phoneOnly">
+        <h3>Floor</h3>
+        <div class="fseg px"><button data-p="#modeSeg [data-m=gf]">Ground</button><button data-p="#modeSeg [data-m=ff]">First</button><button data-p="#modeSeg [data-m=both]">Whole house</button></div>
+        <h3>Walls</h3>
+        <div class="fseg px"><button data-p="#wallSeg [data-w=cut]">Cut (see inside)</button><button data-p="#wallSeg [data-w=full]">Full walls</button></div>
+        <h3>View</h3>
+        <div class="fseg px"><button data-p="#viewSeg [data-v=overview]">3D</button><button data-p="#viewSeg [data-v=inside]">Inside</button><button data-p="#viewSeg [data-v=top]">Top</button><button data-p="#viewSeg [data-v=front]">Outside</button></div>
+        <button class="done walkbtn" data-p="#viewSeg [data-v=walk]">🚶 Walk through the house</button>
+      </div>
+      <h3>Wall paint</h3>
+      <div class="group-label" style="margin-top:0">Inside</div>
+      <div class="chips" id="paints"></div>
+      <div class="group-label">Outside</div>
+      <div class="chips" id="extPaints"></div>
+      <h3>Show</h3>
+      <div class="toggles">
+        <label><input type="checkbox" id="tFurn" checked> Furniture</label>
+        <label><input type="checkbox" id="tLedge" checked> 3 ft walkway around first floor</label>
+      </div>
+    </section>
   </aside>
 </main>
 
@@ -699,7 +743,10 @@ function drawHighlight(id){
   while(hiG.children.length){const c=hiG.children.pop();c.geometry.dispose();}
   const r=ROOM[id];
   if(id==='stairs'||id==='counter'){for(const m of surfMeshes[id]){const b=new THREE.Box3().setFromObject(m);const s=b.getSize(new THREE.Vector3()),c=b.getCenter(new THREE.Vector3());const h=new THREE.Mesh(new THREE.BoxGeometry(s.x+.06,s.y+.06,s.z+.06),M.highlight);h.position.copy(c);hiG.add(h);}return;}
-  for(const q of r.rects){const w=q[2]-q[0],d=q[3]-q[1];const g=new THREE.PlaneGeometry(w,d);g.rotateX(-Math.PI/2);const m=new THREE.Mesh(g,M.highlight);m.position.set(q[0]+w/2,LY[r.lvl]+.05,q[1]+d/2);m.renderOrder=2;hiG.add(m);}
+  const om=new THREE.MeshBasicMaterial({color:'#ff7a1a'}),y=LY[r.lvl]+.06,t=.18;
+  for(const q of r.rects){if(q[4]===0)continue;const w=q[2]-q[0],d=q[3]-q[1];
+    for(const [bw,bd,x,z] of [[w,t,q[0]+w/2,q[1]+t/2],[w,t,q[0]+w/2,q[3]-t/2],[t,d,q[0]+t/2,q[1]+d/2],[t,d,q[2]-t/2,q[1]+d/2]]){
+      const m=new THREE.Mesh(new THREE.BoxGeometry(bw,.04,bd),om);m.position.set(x,y,z);hiG.add(m);}}
 }
 
 /* ================= state ================= */
@@ -724,6 +771,7 @@ function setMode(m){
   syncSeg();renderRooms();
 }
 function syncSeg(){
+  if(typeof syncProxies==='function')setTimeout(syncProxies,0);
   document.querySelectorAll('#modeSeg button').forEach(b=>b.classList.toggle('on',b.dataset.m===ui.mode));
   document.querySelectorAll('#wallSeg button').forEach(b=>b.classList.toggle('on',b.dataset.w===ui.walls));
   document.querySelectorAll('#viewSeg button').forEach(b=>b.classList.toggle('on',b.dataset.v===ui.view));
@@ -856,7 +904,7 @@ function renderStoneTable(){
   for(const s of STONES)html+=`<tr><td><b>${s.name}</b></td><td>${s.g}</td><td>${s.origin}</td><td><span class="mini">${s.v.map(v=>`<span><i style="background-image:url(${swatch(s,v)})"></i>${v.n}</span>`).join('')}</span></td><td>${FINISH[s.fin].label}</td><td>${s.best}</td></tr>`;
   document.getElementById('stoneTable').innerHTML=html;
 }
-function renderAll(){renderRooms();renderStones();renderVariants();renderFinish();renderCard();renderSchedule();}
+function renderAll(){renderRooms();renderStones();renderVariants();renderFinish();renderCard();renderSchedule();if(typeof renderCur==='function')renderCur();}
 
 /* ================= click to select ================= */
 const ray=new THREE.Raycaster(),ptr=new THREE.Vector2();let down=null;
@@ -864,7 +912,7 @@ function shown(o){while(o){if(!o.visible)return false;o=o.parent;}return true;}
 canvas.addEventListener('pointerdown',e=>{down=[e.clientX,e.clientY];});
 canvas.addEventListener('pointerup',e=>{
   if(walk.on)return;
-  if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>5)return;
+  if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>(e.pointerType==='touch'?14:6))return;
   const r=canvas.getBoundingClientRect();ptr.set(((e.clientX-r.left)/r.width)*2-1,-((e.clientY-r.top)/r.height)*2+1);
   ray.setFromCamera(ptr,camera);
   const targets=[];for(const id in surfMeshes)for(const m of surfMeshes[id])if(shown(m))targets.push(m);
@@ -880,9 +928,33 @@ const openPanel=()=>document.body.classList.add('panel-open'),closePanel=()=>doc
 document.getElementById('openPanel').addEventListener('click',openPanel);
 document.getElementById('closePanel').addEventListener('click',closePanel);
 document.getElementById('card').addEventListener('click',e=>{
-  if(e.target.id==='chgStone'){openPanel();document.getElementById('stoneList').scrollIntoView({behavior:'smooth',block:'start'});}
+  if(e.target.id==='chgStone'){openPanel();if(isPhone()){setSec('stone');setTimeout(focusRoom,300);}else document.getElementById('stoneList').scrollIntoView({behavior:'smooth',block:'start'});}
   if(e.target.id==='minCard'){cardMin=!cardMin;renderCard();}
 });
+
+/* ================= option tabs (phone) ================= */
+const isPhone=()=>window.matchMedia('(max-width:860px)').matches;
+let curSec='rooms';
+function setSec(n){curSec=n;document.querySelectorAll('.sec').forEach(e=>e.classList.toggle('on',e.dataset.sec===n));document.querySelectorAll('#stabs button').forEach(b=>b.classList.toggle('on',b.dataset.s===n));document.getElementById('panel').scrollTop=0;}
+document.getElementById('stabs').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setSec(b.dataset.s);});
+document.getElementById('roomList').addEventListener('click',e=>{if(e.target.closest('.room')&&isPhone())setSec('stone');});
+document.getElementById('stoneList').addEventListener('click',e=>{if(e.target.closest('.stone')&&isPhone())setSec('colour');});
+document.getElementById('doneBtn').addEventListener('click',()=>{document.body.classList.remove('panel-open');setTimeout(()=>goView(ui.view==='walk'?'overview':ui.view),300);});
+function renderCur(){const id=ui.sel,s=surf[id],v=s.stone.v[s.vi];document.getElementById('curSel').innerHTML=`<span class="sw" style="background-image:url(${swatch(s.stone,v)})"></span><span><b>${ROOM[id].name}</b><small>${s.stone.name} · ${v.n} · ${FINISH[s.finish].label}</small></span>`;}
+setSec('rooms');
+
+document.querySelectorAll('[data-p]').forEach(b=>b.addEventListener('click',()=>{const t=document.querySelector(b.dataset.p);if(!t)return;
+  const closeAfter=/walk|inside|front/.test(b.dataset.p);t.click();if(closeAfter)document.body.classList.remove('panel-open');setTimeout(syncProxies,50);}));
+function syncProxies(){document.querySelectorAll('[data-p]').forEach(b=>{const t=document.querySelector(b.dataset.p);if(t)b.classList.toggle('on',t.classList.contains('on'));});}
+
+function focusRoom(){
+  if(walk.on)return;const c=centerOf(ui.sel);let span=8;
+  if(ROOM[ui.sel].rects.length){const q=ROOM[ui.sel].rects[0];span=Math.max(q[2]-q[0],q[3]-q[1]);}
+  const d=Math.max(14,span*1.5);
+  anim={p0:camera.position.clone(),t0:controls.target.clone(),p1:new THREE.Vector3(c.x-d*.35,c.y+d*1.05,c.z+d*.75),t1:c.clone(),start:performance.now()};
+}
+document.getElementById('roomList').addEventListener('click',e=>{if(e.target.closest('.room')&&isPhone())setTimeout(focusRoom,50);});
+document.getElementById('openPanel').addEventListener('click',()=>{if(isPhone())setTimeout(focusRoom,300);});
 /* ================= walkthrough ================= */
 const hemi=scene.children.find(o=>o.isHemisphereLight);
 const walkLight=new THREE.PointLight('#fff1dc',0,32,1.2);scene.add(walkLight);
