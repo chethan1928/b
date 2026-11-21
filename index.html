@@ -322,7 +322,18 @@ const STONES = [
   v:[{n:'Beige',base:'#d8bf9e',a:['#b89f7c','#e8d5ba']},{n:'Red-Pink',base:'#bf7f68',a:['#9c5f4a','#d59b85']}]},
  {id:'slate',g:'Natural stone',name:'Deoli Slate',origin:'Rajasthan / Himachal',p:'slate',tile:[2,1],fin:'natural',best:'Rustic floors, balconies',
   v:[{n:'Grey',base:'#6b6d6b',a:['#4f514f','#868886']},{n:'Green',base:'#5e6c57',a:['#465242','#76866e']},{n:'Rust',base:'#8a5b3b',a:['#5e3b24','#b07c52','#6b6d6b']},{n:'Black',base:'#2d2d2d',a:['#1c1c1c','#3f3f3f']}]},
+ // Wood
+ {id:'teak',g:'Wood',name:'Teak Wood (solid)',origin:'Kerala / imported teak',p:'wood',tile:[4,.5],fin:'honed',best:'Bedrooms & living; warm, long-lasting, keep dry',
+  v:[{n:'Golden Teak',base:'#a8743f',a:['#6e4423','#c99560']},{n:'Dark Teak',base:'#6b4026',a:['#3e2414','#8a5a36']}]},
+ {id:'engwood',g:'Wood',name:'Engineered Wood',origin:'Imported / Indian brands',p:'wood',tile:[4,.63],fin:'honed',best:'Bedrooms; real wood top, more stable than solid',
+  v:[{n:'Light Oak',base:'#c9a77c',a:['#9c7a52','#dcc29e']},{n:'Walnut',base:'#5e3f2a',a:['#3a2416','#7d5638']}]},
+ {id:'laminate',g:'Wood',name:'Laminate Flooring',origin:'Indian & imported brands',p:'wood',tile:[4,.66],fin:'honed',best:'Budget wood look for dry rooms',
+  v:[{n:'Light Oak',base:'#d0b289',a:['#a88a62','#e2cba8']},{n:'Walnut',base:'#6a4a33',a:['#432b1b','#8a6648']},{n:'Grey Wash',base:'#9a958c',a:['#6f6a62','#b9b4ab']}]},
+ {id:'woodtile',g:'Wood',name:'Wooden-look Vitrified Tile',origin:'Morbi, Gujarat',p:'wood',tile:[4,.66],fin:'honed',best:'Wood look that is waterproof; OK for balconies',
+  v:[{n:'Natural Oak',base:'#b8916a',a:['#8c6844','#d2b08a']},{n:'Teak Brown',base:'#8a5d3b',a:['#5c3a22','#a87a52']},{n:'Ash Grey',base:'#a29d95',a:['#77726a','#c0bbb3']}]},
 ];
+const isWood=s=>s.p==='wood';
+function texSpan(stone){const[tw,th]=stone.tile;return isWood(stone)?[tw*2,th*8]:[tw*2,th*2];}
 const FINISH = {
   polished:{label:'Polished',rough:0.12,cc:0.85,ccr:0.05},
   honed:{label:'Honed / Matt',rough:0.5,cc:0.15,ccr:0.4},
@@ -388,6 +399,12 @@ const GEN={
     if(L>2)mixc(o,v.A[1],sm(.55,.72,K.fbm(X*.7+4,Y*.9,5))*.8);
     const cl=1-Math.abs(K.fbm(X*.5,Y*6,3)-.5)*2;mixc(o,[.06,.06,.06],Math.pow(cl,30)*.5);
   },
+  wood(X,Y,T,v,K,o){
+    const f=K.fbm(X*.12,Y*22,4);mixc(o,v.A[0],sm(.42,.75,f)*.55);
+    const c=Math.abs(Math.sin((Y*9+K.fbm(X*.35,Y*.9,3)*2.4+X*.04)*Math.PI));mixc(o,v.A[0],Math.pow(1-c,7)*.4);
+    mixc(o,v.A[1],sm(.55,.8,K.fbm(X*.2+5,Y*11,3))*.35);
+    const kn=K.n(X*1.3+T.ox,Y*6+T.oy);if(kn>.93)mixc(o,v.A[0],sm(.93,.99,kn)*.6);
+  },
   onyx(X,Y,T,v,K,o){
     const r=Math.hypot((X-T.cx)*1.3,(Y-T.cy)*.85)+K.fbm(X*.6,Y*.6,5)*1.6;
     const b=Math.sin(r*6.5)*.5+.5,L=v.A.length,idx=Math.floor(K.n(r*2.2,0)*L*1.999)%L;
@@ -399,12 +416,14 @@ function prep(v){if(!v.A){v.A=v.a.map(h2l);v.B=h2l(v.base);}return v;}
 function genStone(stone,v,W,H,ftW,ftH,grout){
   prep(v);const K=noiseKit(hash(stone.id+v.n)&0x7fffffff);
   const c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');const img=g.createImageData(W,H),d=img.data;
-  const[tw,th]=stone.tile;const f=GEN[stone.p];const tiles=new Map();
-  const tileInfo=(i,j)=>{const key=i+','+j;let t=tiles.get(key);if(!t){const r=rng(hash(stone.id+v.n+key));const ang=(r()-.5)*1.4+(r()<.5?0:Math.PI/2);
-    t={ox:r()*200,oy:r()*200,ca:Math.cos(ang),sa:Math.sin(ang),cx:r()*tw,cy:r()*th,ix:Math.floor(r()*9999),iy:Math.floor(r()*9999),shade:(r()-.5)*.06};tiles.set(key,t);}return t;};
+  const[tw,th]=stone.tile;const f=GEN[stone.p];const tiles=new Map();const cols=Math.max(1,Math.round(ftW/tw)),rows=Math.max(1,Math.round(ftH/th));const wood=isWood(stone);
+  const rowOff=j=>wood?((hash(stone.id+'r'+(((j%rows)+rows)%rows))%1000)/1000)*tw:0;
+  const tileInfo=(i,j)=>{i=((i%cols)+cols)%cols;j=((j%rows)+rows)%rows;const key=i+','+j;let t=tiles.get(key);if(!t){const r=rng(hash(stone.id+v.n+key));const ang=(r()-.5)*1.4+(r()<.5?0:Math.PI/2);
+    t={ox:r()*200,oy:r()*200,ca:Math.cos(ang),sa:Math.sin(ang),cx:r()*tw,cy:r()*th,ix:Math.floor(r()*9999),iy:Math.floor(r()*9999),shade:(r()-.5)*(wood?.16:.06)};tiles.set(key,t);}return t;};
   const o=[0,0,0];
   for(let py=0;py<H;py++){const fy=(py+.5)/H*ftH,tj=Math.floor(fy/th);
-    for(let px=0;px<W;px++){const fx=(px+.5)/W*ftW,ti=Math.floor(fx/tw);const T=tileInfo(ti,tj);
+    const ro=rowOff(tj);
+    for(let px=0;px<W;px++){const fx=(px+.5)/W*ftW+ro,ti=Math.floor(fx/tw);const T=tileInfo(ti,tj);
       o[0]=v.B[0];o[1]=v.B[1];o[2]=v.B[2];
       const X=fx-ti*tw+T.ox,Y=fy-tj*th+T.oy;
       f(X,Y,T,v,K,o,px,py);
@@ -414,18 +433,20 @@ function genStone(stone,v,W,H,ftW,ftH,grout){
       d[i+1]=Math.max(0,Math.min(255,Math.pow(Math.max(0,o[1]*(1+fine)),1/2.2)*255));
       d[i+2]=Math.max(0,Math.min(255,Math.pow(Math.max(0,o[2]*(1+fine)),1/2.2)*255));d[i+3]=255;}}
   g.putImageData(img,0,0);
-  if(grout){const ppf=W/ftW;g.strokeStyle=lum(v.base)>.5?'rgba(70,60,50,.30)':'rgba(255,255,255,.10)';g.lineWidth=Math.max(1.5,ppf*.012);
+  if(grout&&wood){const ppf=W/ftW;g.strokeStyle='rgba(30,18,8,.45)';g.lineWidth=Math.max(1.2,ppf*.008);
+    for(let j=0;j<rows;j++){const y=j*th*ppf;g.beginPath();g.moveTo(0,y);g.lineTo(W,y);g.stroke();
+      for(let x=-rowOff(j);x<=ftW+1e-6;x+=tw){if(x<0)continue;g.beginPath();g.moveTo(x*ppf,y);g.lineTo(x*ppf,y+th*ppf);g.stroke();}}}
+  else if(grout){const ppf=W/ftW;g.strokeStyle=lum(v.base)>.5?'rgba(70,60,50,.30)':'rgba(255,255,255,.10)';g.lineWidth=Math.max(1.5,ppf*.012);
     for(let x=0;x<=ftW+1e-6;x+=tw){g.beginPath();g.moveTo(x*ppf,0);g.lineTo(x*ppf,H);g.stroke();}
     for(let y=0;y<=ftH+1e-6;y+=th){g.beginPath();g.moveTo(0,y*ppf);g.lineTo(W,y*ppf);g.stroke();}}
   return c;
 }
 const PX=180;
 const texCache=new Map();
-function stoneCanvas(stone,v,grout=true){const[tw,th]=stone.tile;return genStone(stone,v,Math.round(tw*2*PX),Math.round(th*2*PX),tw*2,th*2,grout);}
+function stoneCanvas(stone,v,grout=true){const[a,b]=texSpan(stone);const px=isWood(stone)?120:PX;return genStone(stone,v,Math.round(a*px),Math.round(b*px),a,b,grout);}
 function getTex(stone,v,grout=true){
   const key=stone.id+'|'+v.n+'|'+grout;if(texCache.has(key))return texCache.get(key);
-  let src=stoneCanvas(stone,v,grout);
-  if(!grout){const c=document.createElement('canvas');c.width=c.height=1024;c.getContext('2d').drawImage(src,0,0,src.width/2,src.height/2,0,0,1024,1024);src=c;}
+  const src=grout?stoneCanvas(stone,v,true):genStone(stone,v,768,768,4,4,false);
   const tex=new THREE.CanvasTexture(src);
   tex.wrapS=tex.wrapT=THREE.RepeatWrapping;tex.colorSpace=THREE.SRGBColorSpace;
   tex.anisotropy=renderer.capabilities.getMaxAnisotropy();
@@ -483,7 +504,7 @@ en:{title:'House Floor Stone Planner',sub:'Ground + first floor in 3D · click a
  f_polished:'Polished',f_honed:'Honed / Matt',f_natural:'Natural / Anti-skid',applyFloor:'Use on every room of this floor',applyHouse:'Use on whole house',done:'✓ Done – show in 3D',
  floor:'Floor',walls:'Walls',view:'View',gShort:'Ground',fShort:'First',cutShort:'Cut (see inside)',v3dShort:'3D',insideShort:'Inside',topShort:'Top',walkHouse:'🚶 Walk through the house',
  wallPaint:'Wall paint',pIn:'Inside',pOut:'Outside',show:'Show',furniture:'Furniture',walkway:'3 ft walkway around first floor',
- Marble:'Marble',Granite:'Granite','Natural stone':'Natural stone',stone:'Stone',colour:'Colour',finish:'Finish',area:'Area',tiles:'Tiles',from:'From',change:'Change stone for this room',
+ Marble:'Marble',Granite:'Granite','Natural stone':'Natural stone',Wood:'Wood',stone:'Stone',colour:'Colour',finish:'Finish',area:'Area',tiles:'Tiles',planks:'Planks',from:'From',change:'Change stone for this room',
  sqft:'sq ft',waste:'incl. 8% waste',slabs:'Cut to size from slabs',youIn:'You are in',stop:'■ Stop walking',hint:'Click a floor to select a room · drag to rotate · scroll to zoom · right-drag to pan',
  padhint:'Push the round stick to walk & turn · drag the screen to look around<br>Laptop: arrow keys / W A S D · Shift = faster · Esc to stop',
  drawn:'Stone picture is computer-drawn – check a real sample',
@@ -494,7 +515,7 @@ te:{title:'ఇంటి ఫ్లోర్ రాయి ప్లానర్',s
  f_polished:'పాలిష్',f_honed:'మ్యాట్',f_natural:'నేచురల్ / జారకుండా',applyFloor:'ఈ ఫ్లోర్ అన్ని గదులకు వాడండి',applyHouse:'మొత్తం ఇంటికి వాడండి',done:'✓ పూర్తయింది – 3Dలో చూపించు',
  floor:'ఫ్లోర్',walls:'గోడలు',view:'వ్యూ',gShort:'గ్రౌండ్',fShort:'ఫస్ట్',cutShort:'కట్ (లోపల చూడండి)',v3dShort:'3D',insideShort:'లోపల',topShort:'పైనుండి',walkHouse:'🚶 ఇంట్లో నడవండి',
  wallPaint:'గోడ రంగు',pIn:'లోపల',pOut:'బయట',show:'చూపించు',furniture:'ఫర్నిచర్',walkway:'ఫస్ట్ ఫ్లోర్ చుట్టూ 3 అడుగుల నడక దారి',
- Marble:'మార్బుల్',Granite:'గ్రానైట్','Natural stone':'సహజ రాయి',stone:'రాయి',colour:'రంగు',finish:'ఫినిష్',area:'విస్తీర్ణం',tiles:'టైల్స్',from:'ఎక్కడి నుండి',change:'ఈ గదికి రాయి మార్చండి',
+ Marble:'మార్బుల్',Granite:'గ్రానైట్','Natural stone':'సహజ రాయి',Wood:'చెక్క',stone:'రాయి',colour:'రంగు',finish:'ఫినిష్',area:'విస్తీర్ణం',tiles:'టైల్స్',planks:'పలకలు',from:'ఎక్కడి నుండి',change:'ఈ గదికి రాయి మార్చండి',
  sqft:'చ.అడుగులు',waste:'8% వృథాతో కలిపి',slabs:'స్లాబుల నుండి కొలతకు కట్',youIn:'మీరు ఉన్నది',stop:'■ నడక ఆపండి',hint:'గదిని ఎంచుకోవడానికి ఫ్లోర్‌పై నొక్కండి · తిప్పడానికి లాగండి · జూమ్ చేయండి',
  padhint:'నడవడానికి & తిరగడానికి గుండ్రని స్టిక్‌ను నెట్టండి · చుట్టూ చూడటానికి స్క్రీన్‌ను లాగండి<br>ల్యాప్‌టాప్: యారో కీలు / W A S D',
  drawn:'రాయి చిత్రం కంప్యూటర్‌తో గీసినది – అసలు నమూనా చూడండి',
@@ -505,7 +526,7 @@ hi:{title:'घर का फ़र्श पत्थर प्लानर',sub
  f_polished:'पॉलिश',f_honed:'मैट',f_natural:'नेचुरल / फिसलन-रोधी',applyFloor:'इस फ्लोर के सभी कमरों में लगाएँ',applyHouse:'पूरे घर में लगाएँ',done:'✓ हो गया – 3D में दिखाएँ',
  floor:'फ्लोर',walls:'दीवारें',view:'व्यू',gShort:'ग्राउंड',fShort:'फर्स्ट',cutShort:'कटी (अंदर देखें)',v3dShort:'3D',insideShort:'अंदर',topShort:'ऊपर से',walkHouse:'🚶 घर में घूमें',
  wallPaint:'दीवार का रंग',pIn:'अंदर',pOut:'बाहर',show:'दिखाएँ',furniture:'फर्नीचर',walkway:'फर्स्ट फ्लोर के चारों ओर 3 फुट रास्ता',
- Marble:'संगमरमर',Granite:'ग्रेनाइट','Natural stone':'प्राकृतिक पत्थर',stone:'पत्थर',colour:'रंग',finish:'फिनिश',area:'क्षेत्रफल',tiles:'टाइलें',from:'कहाँ से',change:'इस कमरे का पत्थर बदलें',
+ Marble:'संगमरमर',Granite:'ग्रेनाइट','Natural stone':'प्राकृतिक पत्थर',Wood:'लकड़ी',stone:'पत्थर',colour:'रंग',finish:'फिनिश',area:'क्षेत्रफल',tiles:'टाइलें',planks:'तख्ते',from:'कहाँ से',change:'इस कमरे का पत्थर बदलें',
  sqft:'वर्ग फुट',waste:'8% बर्बादी सहित',slabs:'स्लैब से नाप में कटाई',youIn:'आप यहाँ हैं',stop:'■ चलना बंद करें',hint:'कमरा चुनने के लिए फ़र्श पर टैप करें · घुमाने के लिए खींचें · ज़ूम करें',
  padhint:'चलने और मुड़ने के लिए गोल स्टिक दबाएँ · चारों ओर देखने के लिए स्क्रीन खींचें<br>लैपटॉप: एरो कीज़ / W A S D',
  drawn:'पत्थर की तस्वीर कंप्यूटर से बनी है – असली नमूना देखें',
@@ -516,7 +537,7 @@ kn:{title:'ಮನೆ ನೆಲದ ಕಲ್ಲು ಯೋಜಕ',sub:'ನೆಲ +
  f_polished:'ಪಾಲಿಶ್',f_honed:'ಮ್ಯಾಟ್',f_natural:'ನೈಸರ್ಗಿಕ / ಜಾರದ',applyFloor:'ಈ ಮಹಡಿಯ ಎಲ್ಲ ಕೋಣೆಗಳಿಗೆ ಬಳಸಿ',applyHouse:'ಇಡೀ ಮನೆಗೆ ಬಳಸಿ',done:'✓ ಆಯಿತು – 3D ಯಲ್ಲಿ ತೋರಿಸಿ',
  floor:'ಮಹಡಿ',walls:'ಗೋಡೆಗಳು',view:'ನೋಟ',gShort:'ನೆಲ',fShort:'ಮೊದಲ',cutShort:'ಕತ್ತರಿಸಿ (ಒಳಗೆ)',v3dShort:'3D',insideShort:'ಒಳಗೆ',topShort:'ಮೇಲೆ',walkHouse:'🚶 ಮನೆಯಲ್ಲಿ ನಡೆಯಿರಿ',
  wallPaint:'ಗೋಡೆ ಬಣ್ಣ',pIn:'ಒಳಗೆ',pOut:'ಹೊರಗೆ',show:'ತೋರಿಸಿ',furniture:'ಪೀಠೋಪಕರಣ',walkway:'ಮೊದಲ ಮಹಡಿ ಸುತ್ತ 3 ಅಡಿ ದಾರಿ',
- Marble:'ಅಮೃತಶಿಲೆ',Granite:'ಗ್ರಾನೈಟ್','Natural stone':'ನೈಸರ್ಗಿಕ ಕಲ್ಲು',stone:'ಕಲ್ಲು',colour:'ಬಣ್ಣ',finish:'ಫಿನಿಶ್',area:'ವಿಸ್ತೀರ್ಣ',tiles:'ಟೈಲ್ಸ್',from:'ಎಲ್ಲಿಂದ',change:'ಈ ಕೋಣೆಯ ಕಲ್ಲು ಬದಲಿಸಿ',
+ Marble:'ಅಮೃತಶಿಲೆ',Granite:'ಗ್ರಾನೈಟ್','Natural stone':'ನೈಸರ್ಗಿಕ ಕಲ್ಲು',Wood:'ಮರ',stone:'ಕಲ್ಲು',colour:'ಬಣ್ಣ',finish:'ಫಿನಿಶ್',area:'ವಿಸ್ತೀರ್ಣ',tiles:'ಟೈಲ್ಸ್',planks:'ಹಲಗೆಗಳು',from:'ಎಲ್ಲಿಂದ',change:'ಈ ಕೋಣೆಯ ಕಲ್ಲು ಬದಲಿಸಿ',
  sqft:'ಚ.ಅಡಿ',waste:'8% ವ್ಯರ್ಥ ಸೇರಿ',slabs:'ಸ್ಲ್ಯಾಬ್‌ನಿಂದ ಅಳತೆಗೆ ಕತ್ತರಿಸಿ',youIn:'ನೀವು ಇರುವುದು',stop:'■ ನಡಿಗೆ ನಿಲ್ಲಿಸಿ',hint:'ಕೋಣೆ ಆಯ್ಕೆಗೆ ನೆಲದ ಮೇಲೆ ಟ್ಯಾಪ್ ಮಾಡಿ · ತಿರುಗಿಸಲು ಎಳೆಯಿರಿ · ಜೂಮ್ ಮಾಡಿ',
  padhint:'ನಡೆಯಲು ಮತ್ತು ತಿರುಗಲು ದುಂಡಗಿನ ಸ್ಟಿಕ್ ತಳ್ಳಿ · ಸುತ್ತ ನೋಡಲು ಪರದೆ ಎಳೆಯಿರಿ<br>ಲ್ಯಾಪ್‌ಟಾಪ್: ಬಾಣದ ಕೀಲಿಗಳು / W A S D',
  drawn:'ಕಲ್ಲಿನ ಚಿತ್ರ ಕಂಪ್ಯೂಟರ್‌ನಿಂದ ರಚಿಸಲಾಗಿದೆ – ನಿಜವಾದ ಮಾದರಿ ನೋಡಿ',
@@ -527,7 +548,7 @@ ta:{title:'வீட்டு தரை கல் திட்டமிடுப
  f_polished:'பாலிஷ்',f_honed:'மேட்',f_natural:'இயற்கை / வழுக்காத',applyFloor:'இந்த தளத்தின் எல்லா அறைகளுக்கும்',applyHouse:'முழு வீட்டிற்கும்',done:'✓ முடிந்தது – 3D-யில் காட்டு',
  floor:'தளம்',walls:'சுவர்கள்',view:'பார்வை',gShort:'தரை',fShort:'முதல்',cutShort:'வெட்டு (உள்ளே)',v3dShort:'3D',insideShort:'உள்ளே',topShort:'மேலே',walkHouse:'🚶 வீட்டில் நடக்க',
  wallPaint:'சுவர் வண்ணம்',pIn:'உள்ளே',pOut:'வெளியே',show:'காட்டு',furniture:'மரச்சாமான்கள்',walkway:'முதல் தளத்தைச் சுற்றி 3 அடி நடைபாதை',
- Marble:'பளிங்கு',Granite:'கிரானைட்','Natural stone':'இயற்கை கல்',stone:'கல்',colour:'நிறம்',finish:'பினிஷ்',area:'பரப்பளவு',tiles:'டைல்ஸ்',from:'எங்கிருந்து',change:'இந்த அறையின் கல்லை மாற்று',
+ Marble:'பளிங்கு',Granite:'கிரானைட்','Natural stone':'இயற்கை கல்',Wood:'மரம்',stone:'கல்',colour:'நிறம்',finish:'பினிஷ்',area:'பரப்பளவு',tiles:'டைல்ஸ்',planks:'பலகைகள்',from:'எங்கிருந்து',change:'இந்த அறையின் கல்லை மாற்று',
  sqft:'ச.அடி',waste:'8% வீணாவது உட்பட',slabs:'ஸ்லாப்களிலிருந்து அளவுக்கு வெட்டு',youIn:'நீங்கள் இருப்பது',stop:'■ நடப்பதை நிறுத்து',hint:'அறையைத் தேர்ந்தெடுக்க தரையைத் தொடவும் · சுழற்ற இழுக்கவும் · ஜூம் செய்யவும்',
  padhint:'நடக்கவும் திரும்பவும் வட்ட ஸ்டிக்கைத் தள்ளவும் · சுற்றிப் பார்க்க திரையை இழுக்கவும்<br>லேப்டாப்: அம்பு விசைகள் / W A S D',
  drawn:'கல் படம் கணினியால் வரையப்பட்டது – உண்மையான மாதிரியைப் பார்க்கவும்',
@@ -847,7 +868,7 @@ function applySurface(id){
   const s=surf[id],v=s.stone.v[s.vi],f=FINISH[s.finish],m=surfMat[id];
   const grout=!(id==='stairs'||id==='counter');
   m.map=getTex(s.stone,v,grout);m.color.set('#ffffff');m.roughness=f.rough;m.clearcoat=f.cc;m.clearcoatRoughness=f.ccr;m.needsUpdate=true;
-  const su=s.stone.tile[0]*2,sv=s.stone.tile[1]*2;
+  const[su,sv]=texSpan(s.stone);
   for(const mesh of surfMeshes[id])updateUV(mesh,grout?su:4,grout?sv:4);
 }
 function levelOf(id){return id==='stairs'?(ui.mode==='ff'?1:0):ROOM[id].lvl;}
@@ -925,7 +946,7 @@ function renderRooms(){
 document.getElementById('roomList').addEventListener('click',e=>{const b=e.target.closest('.room');if(!b)return;if(walk.on){ui.sel=b.dataset.id;renderAll();return;}select(b.dataset.id,{fly:ui.view==='inside'});});
 function renderStones(){
   const el=document.getElementById('stoneList');let html='';
-  for(const g of['Marble','Granite','Natural stone']){
+  for(const g of['Marble','Granite','Natural stone','Wood']){
     html+=`<div class="group-label">${t(g)}</div><div class="stones">`;
     for(const s of STONES.filter(s=>s.g===g))html+=`<button class="stone ${surf[ui.sel].stone.id===s.id?'on':''}" data-id="${s.id}"><span class="sw" style="background-image:url(${swatch(s,s.v[0])})"></span>${s.name}</button>`;
     html+='</div>';
@@ -972,7 +993,7 @@ function renderCard(){
   document.getElementById('card').innerHTML=`<h2>${rn(id)}</h2><div class="sub">${fl} · ${r.size}</div>
   <dl><dt>${t('stone')}</dt><dd>${s.stone.name}</dd><dt>${t('colour')}</dt><dd>${v.n}</dd><dt>${t('finish')}</dt><dd>${t('f_'+s.finish)}</dd>
   <dt>${t('area')}</dt><dd>${areaOf(r).toFixed(1)} ${t('sqft')}</dd>
-  <dt>${t('tiles')}</dt><dd>${slab?t('slabs'):`${tiles(id)} × ${s.stone.tile[0]}×${s.stone.tile[1]} ft (${t('waste')})`}</dd>
+  <dt>${isWood(s.stone)?t('planks'):t('tiles')}</dt><dd>${slab?t('slabs'):`${tiles(id)} × ${s.stone.tile[0]}×${s.stone.tile[1]} ft (${t('waste')})`}</dd>
   <dt>${t('from')}</dt><dd>${s.stone.origin}</dd></dl><div class="drawn">${t('drawn')}</div><button class="chg" id="chgStone">${t('change')}</button><button class="mn" id="minCard" aria-label="Minimise">${cardMin?'▢':'—'}</button>`;
   document.getElementById('card').classList.toggle('min',cardMin);
   document.getElementById('selLabel').textContent=rn(id);
