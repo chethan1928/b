@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>House Floor Stone Planner – Ground & First Floor in 3D</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Telugu:wght@400;600&family=Noto+Sans+Devanagari:wght@400;600&family=Noto+Sans+Kannada:wght@400;600&family=Noto+Sans+Tamil:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f6f4ef;--panel:#fffdf9;--ink:#23211d;--muted:#6f6a61;--line:#e5e0d6;--accent:#8a5a2b;--accent-soft:#f3e8da;}
 *{box-sizing:border-box}
 button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 html,body{overscroll-behavior:none}
-html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:14px}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,'Noto Sans Telugu','Noto Sans Devanagari','Noto Sans Kannada','Noto Sans Tamil',system-ui,sans-serif;font-size:14px}
 header{padding:8px 20px;min-height:52px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;flex-wrap:nowrap;background:var(--panel)}
 header h1{font-size:18px;margin:0;font-weight:700}
 header .sub{color:var(--muted);font-size:13px}
@@ -24,7 +24,7 @@ body.panel-open #view{right:380px}
 .bar>*{flex:none}
 .bar>*{pointer-events:auto}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:rgba(255,253,249,.96)}
-.seg button{border:0;background:transparent;padding:7px 11px;font:500 12.5px Inter,sans-serif;cursor:pointer;color:var(--ink);white-space:nowrap}
+.seg button{border:0;background:transparent;padding:7px 11px;font:500 12.5px Inter,'Noto Sans Telugu','Noto Sans Devanagari','Noto Sans Kannada','Noto Sans Tamil',sans-serif;cursor:pointer;color:var(--ink);white-space:nowrap}
 .seg button+button{border-left:1px solid var(--line)}
 .seg button.on{background:var(--ink);color:#fff}
 .card{position:absolute;left:12px;bottom:12px;background:rgba(255,253,249,.96);border:1px solid var(--line);border-radius:12px;padding:12px 14px;width:330px;box-shadow:0 4px 18px rgba(0,0,0,.08)}
@@ -40,27 +40,29 @@ body.panel-open aside{transform:none}
 .xbtn{border:1px solid var(--line);background:#fff;border-radius:8px;width:32px;height:32px;font-size:16px;cursor:pointer}
 .optbtn{margin-left:auto;border:0;background:var(--accent);color:#fff;border-radius:9px;padding:7px 13px;font:600 13px Inter,sans-serif;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.15)}
 body.panel-open .optbtn{opacity:.5}
-.card .chg{margin-top:9px;width:100%;border:0;background:var(--ink);color:#fff;border-radius:8px;padding:8px;font:600 12.5px Inter,sans-serif;cursor:pointer}
+.card .drawn{margin-top:7px;font-size:11px;color:var(--muted)}
+.card.min .drawn{display:none}
+.card .chg{margin-top:9px;width:100%;border:0;background:var(--ink);color:#fff;border-radius:8px;padding:8px;font:600 12.5px Inter,'Noto Sans Telugu','Noto Sans Devanagari','Noto Sans Kannada','Noto Sans Tamil',sans-serif;cursor:pointer}
 .card.min dl,.card.min .chg{display:none}
 .card .mn{position:absolute;right:8px;top:8px;border:0;background:transparent;font-size:14px;cursor:pointer;color:var(--muted)}
 aside h3{font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:18px 0 8px;font-weight:600}
 aside h3:first-child{margin-top:0}
 .group-label{font-size:12px;font-weight:600;color:var(--accent);margin:10px 0 6px}
 .rooms{display:grid;grid-template-columns:1fr 1fr;gap:5px}
-.room{display:flex;align-items:center;gap:8px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;text-align:left;font:500 12.5px Inter,sans-serif;color:var(--ink);line-height:1.15}
+.room{display:flex;align-items:center;gap:8px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;text-align:left;font:500 12.5px Inter,'Noto Sans Telugu','Noto Sans Devanagari','Noto Sans Kannada','Noto Sans Tamil',sans-serif;color:var(--ink);line-height:1.15}
 .room small{display:block;color:var(--muted);font-weight:400;font-size:11px;margin-top:2px}
 .room.on{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)}
 .stones{display:grid;grid-template-columns:1fr 1fr;gap:5px}
-.stone{display:flex;align-items:center;gap:8px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;text-align:left;font:500 12.5px Inter,sans-serif;color:var(--ink);line-height:1.2}
+.stone{display:flex;align-items:center;gap:8px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;text-align:left;font:500 12.5px Inter,'Noto Sans Telugu','Noto Sans Devanagari','Noto Sans Kannada','Noto Sans Tamil',sans-serif;color:var(--ink);line-height:1.2}
 .stone:hover,.room:hover{border-color:#cbbfa9}
 .stone.on{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)}
 .sw{width:26px;height:26px;border-radius:6px;flex:none;border:1px solid rgba(0,0,0,.12);background-size:cover}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{display:flex;align-items:center;gap:7px;padding:6px 10px 6px 6px;border:1px solid var(--line);border-radius:999px;background:#fff;cursor:pointer;font:500 12.5px Inter,sans-serif;color:var(--ink)}
+.chip{display:flex;align-items:center;gap:7px;padding:6px 10px 6px 6px;border:1px solid var(--line);border-radius:999px;background:#fff;cursor:pointer;font:500 12.5px Inter,'Noto Sans Telugu','Noto Sans Devanagari','Noto Sans Kannada','Noto Sans Tamil',sans-serif;color:var(--ink)}
 .chip .dot{width:20px;height:20px;border-radius:50%;border:1px solid rgba(0,0,0,.15);background-size:cover}
 .chip.on{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:var(--accent-soft)}
 .fseg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
-.fseg button{flex:1;border:0;background:#fff;padding:8px 6px;font:500 12.5px Inter,sans-serif;cursor:pointer;color:var(--ink)}
+.fseg button{flex:1;border:0;background:#fff;padding:8px 6px;font:500 12.5px Inter,'Noto Sans Telugu','Noto Sans Devanagari','Noto Sans Kannada','Noto Sans Tamil',sans-serif;cursor:pointer;color:var(--ink)}
 .fseg button+button{border-left:1px solid var(--line)}
 .fseg button.on{background:var(--ink);color:#fff}
 .apply{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
@@ -93,8 +95,12 @@ body.walking .pad{display:flex}body.walking .hint{display:none}
 .where{position:absolute;left:50%;top:60px;transform:translateX(-50%);background:rgba(35,33,29,.82);color:#fff;padding:6px 14px;border-radius:999px;font-size:13px;font-weight:600;display:none;pointer-events:none}
 body.walking .where{display:block}
 .stabs{display:none}
+.langsel{margin-left:auto;border:1px solid var(--line);background:#fff;border-radius:9px;padding:6px 8px;font:500 13px inherit;color:var(--ink);font-family:inherit}
+.langsel+.optbtn{margin-left:0}
+.optbtn,.walkTop,.seg button{white-space:nowrap}
+.where,.room,.stone,.chip,.fseg button,.apply button,.stabs button,.done,.optbtn,.seg button,.walkTop,.exit,.chg{font-family:Inter,'Noto Sans Telugu','Noto Sans Devanagari','Noto Sans Kannada','Noto Sans Tamil',sans-serif!important}
 .phoneOnly{display:none}
-.walkTop{display:none;border:0;background:var(--accent);color:#fff;border-radius:9px;padding:7px 12px;font:600 12.5px Inter,sans-serif;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.walkTop{display:none;border:0;background:var(--accent);color:#fff;border-radius:9px;padding:7px 12px;font:600 12.5px Inter,'Noto Sans Telugu','Noto Sans Devanagari','Noto Sans Kannada','Noto Sans Tamil',sans-serif;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.15)}
 body.walking .walkTop{display:none!important}
 .cur{display:flex;align-items:center;gap:10px;background:var(--accent-soft);border-radius:10px;padding:8px 10px;margin:4px 0 8px;font-size:13px}
 .cur .sw{width:30px;height:30px}
@@ -102,12 +108,13 @@ body.walking .walkTop{display:none!important}
 .done{display:none;width:100%;margin-top:12px;border:0;background:var(--ink);color:#fff;border-radius:10px;padding:11px;font:600 14px Inter,sans-serif;cursor:pointer}
 @media (max-width:860px){
   .stabs{display:flex;position:sticky;top:-14px;z-index:2;background:var(--panel);margin:0 -16px 6px;padding:6px 10px;gap:6px;border-bottom:1px solid var(--line)}
-  .stabs button{flex:1;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 4px;font:600 12.5px Inter,sans-serif;color:var(--ink)}
+  .stabs button{flex:1;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 4px;font:600 12.5px Inter,'Noto Sans Telugu','Noto Sans Devanagari','Noto Sans Kannada','Noto Sans Tamil',sans-serif;color:var(--ink)}
   .stabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
   .sec{display:none}.sec.on{display:block}
   .phoneOnly{display:block}
   .bar #wallSeg,.bar #viewSeg{display:none}
-  .walkTop{display:inline-block}
+  .walkTop{display:inline-block;order:-1}
+  .optbtn{padding:7px 10px;font-size:12px}
   .walkbtn{background:var(--accent)}
   .sec h3:first-child{margin-top:6px}
   .done{display:block}
@@ -121,7 +128,8 @@ body.walking .walkTop{display:none!important}
   header .sub{display:none}
   .app{height:calc(100vh - 46px);height:calc(100dvh - 46px);min-height:420px}
   header{padding:6px 12px;min-height:46px}
-  header h1{font-size:16px}
+  header h1{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .langsel{padding:5px 4px;font-size:12px;max-width:84px}
   aside{top:auto;width:100%;height:52%;border-left:0;border-top:1px solid var(--line);border-radius:16px 16px 0 0;transform:translateY(102%);box-shadow:0 -8px 24px rgba(0,0,0,.14)}
   body.panel-open #view{right:0;bottom:52%}
   .seg button{padding:6px 8px;font-size:12px}
@@ -145,9 +153,10 @@ body.walking .walkTop{display:none!important}
 </head>
 <body>
 <header>
-  <h1>House Floor Stone Planner</h1>
-  <span class="sub">Ground + first floor in 3D · click a room, then pick its stone and colour</span>
-  <button class="optbtn" id="openPanel">☰ Options</button>
+  <h1 data-i18n="title">House Floor Stone Planner</h1>
+  <span class="sub" data-i18n="sub">Ground + first floor in 3D · click a room, then pick its stone and colour</span>
+  <select id="lang" class="langsel" aria-label="Language"></select>
+  <button class="optbtn" id="openPanel" data-i18n="options">☰ Options</button>
 </header>
 
 <main class="app">
@@ -155,80 +164,80 @@ body.walking .walkTop{display:none!important}
     <canvas id="c"></canvas>
     <div class="bar">
       <div class="seg" id="modeSeg">
-        <button data-m="gf">Ground floor</button>
-        <button data-m="ff">First floor</button>
-        <button data-m="both">Whole house</button>
+        <button data-m="gf" data-i18n="gf">Ground floor</button>
+        <button data-m="ff" data-i18n="ff">First floor</button>
+        <button data-m="both" data-i18n="both">Whole house</button>
       </div>
-      <button class="walkTop" data-p="#viewSeg [data-v=walk]">🚶 Walk</button>
+      <button class="walkTop" data-p="#viewSeg [data-v=walk]" data-i18n="walk">🚶 Walk</button>
       <div class="seg" id="wallSeg">
-        <button data-w="cut">Walls cut (see inside)</button>
-        <button data-w="full">Full walls</button>
+        <button data-w="cut" data-i18n="cut">Walls cut (see inside)</button>
+        <button data-w="full" data-i18n="full">Full walls</button>
       </div>
       <div class="seg" id="viewSeg">
-        <button data-v="overview">3D view</button>
-        <button data-v="inside">Inside room</button>
-        <button data-v="top">Top plan</button>
-        <button data-v="front">Outside</button>
-        <button data-v="walk">🚶 Walk</button>
+        <button data-v="overview" data-i18n="v3d">3D view</button>
+        <button data-v="inside" data-i18n="inside">Inside room</button>
+        <button data-v="top" data-i18n="top">Top plan</button>
+        <button data-v="front" data-i18n="outside">Outside</button>
+        <button data-v="walk" data-i18n="walk">🚶 Walk</button>
       </div>
     </div>
     <div class="card" id="card"></div>
     <div class="where" id="where"></div>
     <div class="pad" id="pad">
-      <div class="padhint">Push the round stick to walk & turn · drag the screen to look around<br>Laptop: arrow keys / W A S D · Shift = faster · Esc to stop</div>
+      <div class="padhint" data-i18n-html="padhint">Push the round stick to walk & turn · drag the screen to look around<br>Laptop: arrow keys / W A S D · Shift = faster · Esc to stop</div>
       <div class="joy" id="joy" aria-label="Move joystick"><span class="ar u">▲</span><span class="ar d">▼</span><span class="ar l">◀</span><span class="ar r">▶</span><div class="knob" id="knob"></div></div>
-      <button class="exit" id="exitWalk">■ Stop walking</button>
+      <button class="exit" id="exitWalk" data-i18n="stop">■ Stop walking</button>
     </div>
-    <div class="hint">Click a floor to select a room · drag to rotate · scroll to zoom · right-drag to pan</div>
+    <div class="hint" data-i18n="hint">Click a floor to select a room · drag to rotate · scroll to zoom · right-drag to pan</div>
   </div>
   <aside id="panel">
-    <div class="ptop"><b>Options</b><button class="xbtn" id="closePanel" aria-label="Close options">✕</button></div>
+    <div class="ptop"><b data-i18n="optTitle">Options</b><button class="xbtn" id="closePanel" aria-label="Close options">✕</button></div>
     <div class="cur" id="curSel"></div>
     <div class="stabs" id="stabs">
-      <button data-s="rooms">1 Room</button><button data-s="stone">2 Stone</button><button data-s="colour">3 Colour</button><button data-s="paint">4 View</button>
+      <button data-s="rooms" data-i18n="tRoom">1 Room</button><button data-s="stone" data-i18n="tStone">2 Stone</button><button data-s="colour" data-i18n="tColour">3 Colour</button><button data-s="paint" data-i18n="tView">4 View</button>
     </div>
     <section class="sec" data-sec="rooms">
-      <h3>1 · Choose a room</h3>
+      <h3 data-i18n="hRoom">1 · Choose a room</h3>
       <div id="roomList"></div>
     </section>
     <section class="sec" data-sec="stone">
-      <h3>2 · Stone for <span id="selLabel"></span></h3>
+      <h3><span data-i18n="hStone">2 · Stone for</span> <span id="selLabel"></span></h3>
       <div id="stoneList"></div>
     </section>
     <section class="sec" data-sec="colour">
-      <h3>3 · Colour</h3>
+      <h3 data-i18n="hColour">3 · Colour</h3>
       <div class="chips" id="variants"></div>
-      <h3>Finish</h3>
+      <h3 data-i18n="hFinish">Finish</h3>
       <div class="fseg" id="finish">
-        <button data-f="polished">Polished</button>
-        <button data-f="honed">Honed / Matt</button>
-        <button data-f="natural">Natural / Anti-skid</button>
+        <button data-f="polished" data-i18n="f_polished">Polished</button>
+        <button data-f="honed" data-i18n="f_honed">Honed / Matt</button>
+        <button data-f="natural" data-i18n="f_natural">Natural / Anti-skid</button>
       </div>
       <div class="apply">
-        <button id="applyFloor">Use on every room of this floor</button>
-        <button id="applyHouse">Use on whole house</button>
+        <button id="applyFloor" data-i18n="applyFloor">Use on every room of this floor</button>
+        <button id="applyHouse" data-i18n="applyHouse">Use on whole house</button>
       </div>
-      <button class="done" id="doneBtn">✓ Done – show in 3D</button>
+      <button class="done" id="doneBtn" data-i18n="done">✓ Done – show in 3D</button>
     </section>
     <section class="sec" data-sec="paint">
       <div class="phoneOnly">
-        <h3>Floor</h3>
-        <div class="fseg px"><button data-p="#modeSeg [data-m=gf]">Ground</button><button data-p="#modeSeg [data-m=ff]">First</button><button data-p="#modeSeg [data-m=both]">Whole house</button></div>
-        <h3>Walls</h3>
-        <div class="fseg px"><button data-p="#wallSeg [data-w=cut]">Cut (see inside)</button><button data-p="#wallSeg [data-w=full]">Full walls</button></div>
-        <h3>View</h3>
-        <div class="fseg px"><button data-p="#viewSeg [data-v=overview]">3D</button><button data-p="#viewSeg [data-v=inside]">Inside</button><button data-p="#viewSeg [data-v=top]">Top</button><button data-p="#viewSeg [data-v=front]">Outside</button></div>
-        <button class="done walkbtn" data-p="#viewSeg [data-v=walk]">🚶 Walk through the house</button>
+        <h3 data-i18n="floor">Floor</h3>
+        <div class="fseg px"><button data-p="#modeSeg [data-m=gf]" data-i18n="gShort">Ground</button><button data-p="#modeSeg [data-m=ff]" data-i18n="fShort">First</button><button data-p="#modeSeg [data-m=both]" data-i18n="both">Whole house</button></div>
+        <h3 data-i18n="walls">Walls</h3>
+        <div class="fseg px"><button data-p="#wallSeg [data-w=cut]" data-i18n="cutShort">Cut (see inside)</button><button data-p="#wallSeg [data-w=full]" data-i18n="full">Full walls</button></div>
+        <h3 data-i18n="view">View</h3>
+        <div class="fseg px"><button data-p="#viewSeg [data-v=overview]" data-i18n="v3dShort">3D</button><button data-p="#viewSeg [data-v=inside]" data-i18n="insideShort">Inside</button><button data-p="#viewSeg [data-v=top]" data-i18n="topShort">Top</button><button data-p="#viewSeg [data-v=front]" data-i18n="outside">Outside</button></div>
+        <button class="done walkbtn" data-p="#viewSeg [data-v=walk]" data-i18n="walkHouse">🚶 Walk through the house</button>
       </div>
-      <h3>Wall paint</h3>
-      <div class="group-label" style="margin-top:0">Inside</div>
+      <h3 data-i18n="wallPaint">Wall paint</h3>
+      <div class="group-label" style="margin-top:0" data-i18n="pIn">Inside</div>
       <div class="chips" id="paints"></div>
-      <div class="group-label">Outside</div>
+      <div class="group-label" data-i18n="pOut">Outside</div>
       <div class="chips" id="extPaints"></div>
-      <h3>Show</h3>
+      <h3 data-i18n="show">Show</h3>
       <div class="toggles">
-        <label><input type="checkbox" id="tFurn" checked> Furniture</label>
-        <label><input type="checkbox" id="tLedge" checked> 3 ft walkway around first floor</label>
+        <label><input type="checkbox" id="tFurn" checked> <span data-i18n="furniture">Furniture</span></label>
+        <label><input type="checkbox" id="tLedge" checked> <span data-i18n="walkway">3 ft walkway around first floor</span></label>
       </div>
     </section>
   </aside>
@@ -287,7 +296,7 @@ const STONES = [
  {id:'absblack',g:'Granite',name:'Absolute Black',origin:'Karnataka / Andhra Pradesh',p:'granite',tile:[2,2],fin:'polished',best:'Modern floors, stairs, kitchens',
   v:[{n:'Jet Black',base:'#151515',a:['#262626','#0b0b0b','#1b1b1b']},{n:'Leather Black',base:'#232323',a:['#333333','#141414','#2a2a2a']}]},
  {id:'galaxy',g:'Granite',name:'Black Galaxy',origin:'Ongole, Andhra Pradesh',p:'granite',tile:[2,2],fin:'polished',best:'Luxury modern look',
-  v:[{n:'Gold speck',base:'#121212',a:['#d6ae55','#9a7834','#1c1c1c','#242424','#1c1c1c','#242424','#1c1c1c','#242424','#1c1c1c','#242424','#1c1c1c','#242424','#1c1c1c','#242424','#1c1c1c','#242424','#1c1c1c','#242424','#1c1c1c','#242424']},{n:'Copper speck',base:'#141210',a:['#c07a44','#7a4826','#1e1b19','#272320','#1e1b19','#272320','#1e1b19','#272320','#1e1b19','#272320','#1e1b19','#272320','#1e1b19','#272320','#1e1b19','#272320','#1e1b19','#272320','#1e1b19','#272320']}]},
+  v:[{n:'Gold speck',sparkle:1,base:'#121212',a:['#d6ae55','#9a7834','#1c1c1c','#242424','#1c1c1c','#242424','#1c1c1c','#242424','#1c1c1c','#242424','#1c1c1c','#242424','#1c1c1c','#242424','#1c1c1c','#242424','#1c1c1c','#242424','#1c1c1c','#242424']},{n:'Copper speck',sparkle:1,base:'#141210',a:['#c07a44','#7a4826','#1e1b19','#272320','#1e1b19','#272320','#1e1b19','#272320','#1e1b19','#272320','#1e1b19','#272320','#1e1b19','#272320','#1e1b19','#272320','#1e1b19','#272320','#1e1b19','#272320']}]},
  {id:'tanbrown',g:'Granite',name:'Tan Brown',origin:'Karimnagar, Telangana',p:'granite',tile:[2,2],fin:'polished',best:'High-traffic halls, stairs',
   v:[{n:'Classic Tan Brown',base:'#4a2a22',a:['#120c0a','#7a3a2a','#2a1712','#5c3328']}]},
  {id:'kashmir',g:'Granite',name:'Kashmir White',origin:'Tamil Nadu',p:'granite',tile:[2,2],fin:'polished',best:'Light floors that hide dirt',
@@ -330,79 +339,89 @@ function shade(h,amt){const c=hex(h).map(v=>Math.max(0,Math.min(255,Math.round(v
 function lum(h){const[r,g,b]=hex(h);return(0.299*r+0.587*g+0.114*b)/255;}
 
 /* ---------------- procedural stone textures ---------------- */
-function blob(g,cx,cy,rad,col,al){const gr=g.createRadialGradient(cx,cy,0,cx,cy,rad);gr.addColorStop(0,rgba(col,al));gr.addColorStop(1,rgba(col,0));g.fillStyle=gr;g.fillRect(cx-rad,cy-rad,rad*2,rad*2);}
-function vein(g,px,py,ang,len,col,al,lw,r,depth=0){
-  g.strokeStyle=rgba(col,al);g.lineWidth=lw;g.lineCap='round';g.lineJoin='round';
-  g.beginPath();g.moveTo(px,py);let a=ang;const branches=[];
-  for(let s=0;s<len;s+=5){a+=(r()-.5)*.32;px+=Math.cos(a)*5;py+=Math.sin(a)*5;g.lineTo(px,py);if(depth<2&&r()<.012)branches.push([px,py,a+(r()-.5)*1.6]);}
-  g.stroke();
-  for(const b of branches)vein(g,b[0],b[1],b[2],len*.35,col,al*.7,lw*.55,r,depth+1);
+/* ---- realistic procedural stone (noise based) ---- */
+function noiseKit(seed){
+  const hash=(x,y)=>{let h=(Math.imul(x,374761393)+Math.imul(y,668265263)+Math.imul(seed,1442695041))|0;h=Math.imul(h^(h>>>13),1274126177);h^=h>>>16;return(h>>>0)/4294967296;};
+  const n=(x,y)=>{const xi=Math.floor(x),yi=Math.floor(y),xf=x-xi,yf=y-yi,u=xf*xf*(3-2*xf),w=yf*yf*(3-2*yf);
+    const a=hash(xi,yi),b=hash(xi+1,yi),c=hash(xi,yi+1),d=hash(xi+1,yi+1);return a+(b-a)*u+(c-a)*w+(a-b-c+d)*u*w;};
+  const fbm=(x,y,o=4)=>{let s=0,a=.5,f=1,t=0;for(let i=0;i<o;i++){s+=a*n(x*f+i*17.3,y*f-i*9.1);t+=a;f*=2.03;a*=.5;}return s/t;};
+  return{hash,n,fbm};
 }
-const PAT={
-  marble(g,x,y,w,h,v,r){
-    for(let k=0;k<26;k++)blob(g,x+r()*w,y+r()*h,40+r()*170,v.a[1],.22);
-    const n=4+Math.floor(r()*5);
-    for(let k=0;k<n;k++){
-      g.filter=r()<.5?'blur(1.2px)':'none';
-      vein(g,x+r()*w,y+r()*h,r()*Math.PI*2,200+r()*700,v.a[0],.22+r()*.45,.6+r()*2.4,r);
-    }
-    g.filter='none';
+const sm=(e0,e1,x)=>{const t=Math.max(0,Math.min(1,(x-e0)/(e1-e0)));return t*t*(3-2*t);};
+function mixc(o,c,t){o[0]+=(c[0]-o[0])*t;o[1]+=(c[1]-o[1])*t;o[2]+=(c[2]-o[2])*t;}
+const GEN={
+  marble(X,Y,T,v,K,o){
+    const w=K.fbm(X*.32,Y*.32,3),w2=K.fbm(X*.7+31,Y*.7-7,3),det=K.fbm(X*2.2,Y*2.2,3);
+    const u=X*T.ca+Y*T.sa;
+    mixc(o,v.A[1],sm(.35,.8,K.fbm(X*.6+50,Y*.6,4))*.6);
+    const v1=1-Math.abs(Math.sin((u*.55+w*1.9+det*.12)*Math.PI));
+    const v2=1-Math.abs(Math.sin((u*.3+w2*1.6+3+det*.08)*Math.PI));
+    const fade=sm(.3,.7,K.fbm(X*.5+80,Y*.5,3));
+    const thin=Math.pow(v1,34)*(.5+.5*fade);
+    const soft=Math.pow(v1,6)*.22*fade;
+    const sec=Math.pow(v2,90)*.55*(1-fade*.5);
+    mixc(o,v.A[0],Math.min(1,thin*.9+soft+sec));
   },
-  granite(g,x,y,w,h,v,r){
-    const n=Math.floor(w*h/11);
-    for(let k=0;k<n;k++){
-      const c=v.a[Math.floor(r()*v.a.length)];g.fillStyle=rgba(c,.5+r()*.5);
-      const s=.8+Math.pow(r(),3)*6;g.fillRect(x+r()*w,y+r()*h,s,s*(.6+r()*.8));
-    }
+  granite(X,Y,T,v,K,o,px,py){
+    const c=K.n(X*26+T.ox,Y*26+T.oy),g=K.hash(px+T.ix,py+T.iy),m=K.n(X*55,Y*55);
+    const L=v.A.length;
+    const k=c*.55+m*.25+g*.2;
+    if(k>.5){const idx=Math.floor(K.n(X*17+3,Y*17+9)*L*1.999+g*L)%L;mixc(o,v.A[idx],sm(.5,.58,k));}
+    const sh=(K.fbm(X*.6,Y*.6,3)-.5)*.10;o[0]*=1+sh;o[1]*=1+sh;o[2]*=1+sh;
+    if(v.sparkle&&g>.9965){mixc(o,[1,.88,.55],.85);}
   },
-  kota(g,x,y,w,h,v,r){
-    for(let k=0;k<55;k++)blob(g,x+r()*w,y+r()*h,30+r()*170,v.a[r()<.5?0:1],.16);
-    for(let k=0;k<6;k++)blob(g,x+r()*w,y+r()*h,8+r()*25,v.a[0],.3);
+  kota(X,Y,T,v,K,o,px,py){
+    const f=K.fbm(X*.7,Y*.7,5);mixc(o,f<.5?v.A[0]:v.A[1],Math.abs(f-.5)*1.6);
+    const st=K.fbm(X*.25,Y*3.2,3);mixc(o,v.A[0],sm(.62,.75,st)*.25);
+    if(K.hash(px,py)>.9985)mixc(o,v.A[0],.6);
   },
-  sand(g,x,y,w,h,v,r){
-    for(let k=0;k<30;k++)blob(g,x+r()*w,y+r()*h,40+r()*150,v.a[r()<.5?0:1],.14);
-    for(let yy=y;yy<y+h;yy+=4+r()*10){
-      g.strokeStyle=rgba(v.a[r()<.5?0:1],.06+r()*.1);g.lineWidth=1+r()*4;g.beginPath();
-      const ph=r()*6,amp=2+r()*6,fr=.005+r()*.01;
-      for(let xx=x;xx<=x+w;xx+=8)g.lineTo(xx,yy+Math.sin(xx*fr+ph)*amp);g.stroke();
-    }
-    if(v.fossils){for(let k=0;k<7;k++){const cx=x+r()*w,cy=y+r()*h,s=6+r()*14;g.strokeStyle=rgba(v.a[0],.45);g.lineWidth=1.4;g.beginPath();for(let t=0;t<12;t+=.2){const rr=s*t/12;g.lineTo(cx+Math.cos(t)*rr,cy+Math.sin(t)*rr);}g.stroke();}}
+  sand(X,Y,T,v,K,o,px,py){
+    const w=K.fbm(X*.3,Y*.3,4),b=Math.sin((Y*2.4+w*3)*Math.PI)*.5+.5;
+    mixc(o,b<.5?v.A[0]:v.A[1],Math.abs(b-.5)*.32);
+    const f=K.fbm(X*.9+9,Y*.9,5);mixc(o,f<.5?v.A[0]:v.A[1],Math.abs(f-.5)*.9);
+    if(v.fossils){const q=K.n(X*3.5+T.ox,Y*3.5+T.oy);if(q>.86){const r=Math.sin((q-.86)*140);mixc(o,v.A[0],Math.max(0,r)*.55);}}
+    if(K.hash(px,py)>.995)mixc(o,v.A[0],.35);
   },
-  slate(g,x,y,w,h,v,r){
-    for(let yy=y;yy<y+h;yy+=3+r()*14){
-      g.strokeStyle=rgba(v.a[Math.floor(r()*v.a.length)],.12+r()*.22);g.lineWidth=2+r()*7;g.beginPath();
-      const ph=r()*6,amp=1+r()*3;for(let xx=x;xx<=x+w;xx+=10)g.lineTo(xx,yy+Math.sin(xx*.01+ph)*amp);g.stroke();
-    }
-    if(v.a.length>2)for(let k=0;k<10;k++)blob(g,x+r()*w,y+r()*h,30+r()*120,v.a[1],.35);
-    for(let k=0;k<3;k++){g.strokeStyle='rgba(0,0,0,.28)';g.lineWidth=1;g.beginPath();let px=x,py=y+r()*h;g.moveTo(px,py);while(px<x+w){px+=10+r()*20;py+=(r()-.5)*10;g.lineTo(px,py);}g.stroke();}
+  slate(X,Y,T,v,K,o){
+    const b=K.fbm(X*.15,Y*3.2,5);const L=v.A.length;
+    mixc(o,b<.5?v.A[0]:v.A[L>2?2:1],Math.abs(b-.5)*1.3);
+    if(L>2)mixc(o,v.A[1],sm(.55,.72,K.fbm(X*.7+4,Y*.9,5))*.8);
+    const cl=1-Math.abs(K.fbm(X*.5,Y*6,3)-.5)*2;mixc(o,[.06,.06,.06],Math.pow(cl,30)*.5);
   },
-  onyx(g,x,y,w,h,v,r){
-    const cx=x+r()*w,cy=y+r()*h;
-    for(let rad=650;rad>4;rad-=3+r()*9){
-      g.strokeStyle=rgba(v.a[Math.floor(r()*v.a.length)],.1+r()*.25);g.lineWidth=1+r()*5;g.beginPath();
-      for(let t=0;t<=Math.PI*2+.1;t+=.07){const rr=rad*(1+.18*Math.sin(t*3+rad*.01)+.07*Math.sin(t*7+rad*.02));g.lineTo(cx+Math.cos(t)*rr*1.3,cy+Math.sin(t)*rr*.8);}
-      g.stroke();
-    }
+  onyx(X,Y,T,v,K,o){
+    const r=Math.hypot((X-T.cx)*1.3,(Y-T.cy)*.85)+K.fbm(X*.6,Y*.6,5)*1.6;
+    const b=Math.sin(r*6.5)*.5+.5,L=v.A.length,idx=Math.floor(K.n(r*2.2,0)*L*1.999)%L;
+    mixc(o,v.A[idx],b*.7);mixc(o,v.A[0],Math.pow(1-Math.abs(Math.sin(r*13)),25)*.6);
   },
 };
-const PX=200; // pixels per foot
-const texCache=new Map();
-function stoneCanvas(stone,v,grout=true){
-  const[tw,th]=stone.tile;const cw=Math.round(tw*2*PX),ch=Math.round(th*2*PX);
-  const c=document.createElement('canvas');c.width=cw;c.height=ch;const g=c.getContext('2d');
-  const r=rng(hash(stone.id+v.n));
-  for(let i=0;i<2;i++)for(let j=0;j<2;j++){
-    const x=i*tw*PX,y=j*th*PX,w=tw*PX,h=th*PX;
-    g.save();g.beginPath();g.rect(x,y,w,h);g.clip();
-    g.fillStyle=shade(v.base,(r()-.5)*.05);g.fillRect(x,y,w,h);
-    PAT[stone.p](g,x,y,w,h,v,r);
-    for(let k=0;k<w*h/45;k++){g.fillStyle=r()<.5?'rgba(0,0,0,.03)':'rgba(255,255,255,.03)';g.fillRect(x+r()*w,y+r()*h,1.5,1.5);}
-    g.restore();
-  }
-  if(grout){g.strokeStyle=lum(v.base)>.5?'rgba(60,50,40,.28)':'rgba(255,255,255,.10)';g.lineWidth=3;
-  for(let i=0;i<2;i++)for(let j=0;j<2;j++)g.strokeRect(i*tw*PX+1.5,j*th*PX+1.5,tw*PX-3,th*PX-3);}
+function h2l(h){return hex(h).map(c=>Math.pow(c/255,2.2));}
+function prep(v){if(!v.A){v.A=v.a.map(h2l);v.B=h2l(v.base);}return v;}
+function genStone(stone,v,W,H,ftW,ftH,grout){
+  prep(v);const K=noiseKit(hash(stone.id+v.n)&0x7fffffff);
+  const c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');const img=g.createImageData(W,H),d=img.data;
+  const[tw,th]=stone.tile;const f=GEN[stone.p];const tiles=new Map();
+  const tileInfo=(i,j)=>{const key=i+','+j;let t=tiles.get(key);if(!t){const r=rng(hash(stone.id+v.n+key));const ang=(r()-.5)*1.4+(r()<.5?0:Math.PI/2);
+    t={ox:r()*200,oy:r()*200,ca:Math.cos(ang),sa:Math.sin(ang),cx:r()*tw,cy:r()*th,ix:Math.floor(r()*9999),iy:Math.floor(r()*9999),shade:(r()-.5)*.06};tiles.set(key,t);}return t;};
+  const o=[0,0,0];
+  for(let py=0;py<H;py++){const fy=(py+.5)/H*ftH,tj=Math.floor(fy/th);
+    for(let px=0;px<W;px++){const fx=(px+.5)/W*ftW,ti=Math.floor(fx/tw);const T=tileInfo(ti,tj);
+      o[0]=v.B[0];o[1]=v.B[1];o[2]=v.B[2];
+      const X=fx-ti*tw+T.ox,Y=fy-tj*th+T.oy;
+      f(X,Y,T,v,K,o,px,py);
+      const fine=(K.hash(px*3+1,py*7+2)-.5)*.035+T.shade;
+      const i=(py*W+px)*4;
+      d[i]=Math.max(0,Math.min(255,Math.pow(Math.max(0,o[0]*(1+fine)),1/2.2)*255));
+      d[i+1]=Math.max(0,Math.min(255,Math.pow(Math.max(0,o[1]*(1+fine)),1/2.2)*255));
+      d[i+2]=Math.max(0,Math.min(255,Math.pow(Math.max(0,o[2]*(1+fine)),1/2.2)*255));d[i+3]=255;}}
+  g.putImageData(img,0,0);
+  if(grout){const ppf=W/ftW;g.strokeStyle=lum(v.base)>.5?'rgba(70,60,50,.30)':'rgba(255,255,255,.10)';g.lineWidth=Math.max(1.5,ppf*.012);
+    for(let x=0;x<=ftW+1e-6;x+=tw){g.beginPath();g.moveTo(x*ppf,0);g.lineTo(x*ppf,H);g.stroke();}
+    for(let y=0;y<=ftH+1e-6;y+=th){g.beginPath();g.moveTo(0,y*ppf);g.lineTo(W,y*ppf);g.stroke();}}
   return c;
 }
+const PX=180;
+const texCache=new Map();
+function stoneCanvas(stone,v,grout=true){const[tw,th]=stone.tile;return genStone(stone,v,Math.round(tw*2*PX),Math.round(th*2*PX),tw*2,th*2,grout);}
 function getTex(stone,v,grout=true){
   const key=stone.id+'|'+v.n+'|'+grout;if(texCache.has(key))return texCache.get(key);
   let src=stoneCanvas(stone,v,grout);
@@ -413,12 +432,8 @@ function getTex(stone,v,grout=true){
   texCache.set(key,tex);return tex;
 }
 const swatchCache=new Map();
-function swatch(stone,v){
-  const key=stone.id+'|'+v.n;if(swatchCache.has(key))return swatchCache.get(key);
-  const src=stoneCanvas(stone,v);const c=document.createElement('canvas');c.width=c.height=64;
-  c.getContext('2d').drawImage(src,PX*.3,PX*.3,PX*1.2,PX*1.2,0,0,64,64);
-  const url=c.toDataURL();swatchCache.set(key,url);return url;
-}
+function swatch(stone,v){const key=stone.id+'|'+v.n;if(swatchCache.has(key))return swatchCache.get(key);
+  const url=genStone(stone,v,72,72,1.3,1.3,false).toDataURL('image/jpeg',.85);swatchCache.set(key,url);return url;}
 
 
 
@@ -457,6 +472,79 @@ const ROOM=Object.fromEntries(ROOMS.map(r=>[r.id,r]));
 const surf={};for(const r of ROOMS)surf[r.id]={stone:STONES.find(s=>s.id===r.def[0]),vi:r.def[1],finish:r.def[2]};
 const STAIR_AREA=20*2.8*.65+20*2.8*.5725+2.92*5.9, COUNTER_AREA=2*12.75+7.5*2;
 function areaOf(r){if(r.id==='stairs')return STAIR_AREA;if(r.id==='counter')return COUNTER_AREA;return r.rects.reduce((a,q)=>a+(q[4]===0?0:(q[2]-q[0])*(q[3]-q[1])),0);}
+
+
+/* ================= languages ================= */
+const LANGS={en:'English',te:'తెలుగు',hi:'हिंदी',kn:'ಕನ್ನಡ',ta:'தமிழ்'};
+const I18N={
+en:{title:'House Floor Stone Planner',sub:'Ground + first floor in 3D · click a room, then pick its stone and colour',options:'☰ Options',optTitle:'Options',
+ gf:'Ground floor',ff:'First floor',both:'Whole house',cut:'Walls cut (see inside)',full:'Full walls',v3d:'3D view',inside:'Inside room',top:'Top plan',outside:'Outside',walk:'🚶 Walk',
+ tRoom:'1 Room',tStone:'2 Stone',tColour:'3 Colour',tView:'4 View',hRoom:'1 · Choose a room',hStone:'2 · Stone for',hColour:'3 · Colour',hFinish:'Finish',
+ f_polished:'Polished',f_honed:'Honed / Matt',f_natural:'Natural / Anti-skid',applyFloor:'Use on every room of this floor',applyHouse:'Use on whole house',done:'✓ Done – show in 3D',
+ floor:'Floor',walls:'Walls',view:'View',gShort:'Ground',fShort:'First',cutShort:'Cut (see inside)',v3dShort:'3D',insideShort:'Inside',topShort:'Top',walkHouse:'🚶 Walk through the house',
+ wallPaint:'Wall paint',pIn:'Inside',pOut:'Outside',show:'Show',furniture:'Furniture',walkway:'3 ft walkway around first floor',
+ Marble:'Marble',Granite:'Granite','Natural stone':'Natural stone',stone:'Stone',colour:'Colour',finish:'Finish',area:'Area',tiles:'Tiles',from:'From',change:'Change stone for this room',
+ sqft:'sq ft',waste:'incl. 8% waste',slabs:'Cut to size from slabs',youIn:'You are in',stop:'■ Stop walking',hint:'Click a floor to select a room · drag to rotate · scroll to zoom · right-drag to pan',
+ padhint:'Push the round stick to walk & turn · drag the screen to look around<br>Laptop: arrow keys / W A S D · Shift = faster · Esc to stop',
+ drawn:'Stone picture is computer-drawn – check a real sample',
+ living_dining:'Living & Dining',hall:'Hall',bedroom:'Bedroom',kitchen:'Kitchen',store:'Store',service:'Service',puja:'Puja',toilet:'Toilet',living_area:'Living Area',lobby:'Lobby',balcony:'Balcony',work_area:'Work Area',staircase:'Staircase',platform:'Kitchen Platform'},
+te:{title:'ఇంటి ఫ్లోర్ రాయి ప్లానర్',sub:'గ్రౌండ్ + ఫస్ట్ ఫ్లోర్ 3Dలో · గదిని ఎంచుకుని, రాయి మరియు రంగు ఎంచుకోండి',options:'☰ ఎంపికలు',optTitle:'ఎంపికలు',
+ gf:'గ్రౌండ్ ఫ్లోర్',ff:'ఫస్ట్ ఫ్లోర్',both:'మొత్తం ఇల్లు',cut:'గోడలు కట్ (లోపల చూడండి)',full:'పూర్తి గోడలు',v3d:'3D వ్యూ',inside:'గది లోపల',top:'పై నుండి ప్లాన్',outside:'బయట',walk:'🚶 నడవండి',
+ tRoom:'1 గది',tStone:'2 రాయి',tColour:'3 రంగు',tView:'4 వ్యూ',hRoom:'1 · గదిని ఎంచుకోండి',hStone:'2 · రాయి –',hColour:'3 · రంగు',hFinish:'ఫినిష్',
+ f_polished:'పాలిష్',f_honed:'మ్యాట్',f_natural:'నేచురల్ / జారకుండా',applyFloor:'ఈ ఫ్లోర్ అన్ని గదులకు వాడండి',applyHouse:'మొత్తం ఇంటికి వాడండి',done:'✓ పూర్తయింది – 3Dలో చూపించు',
+ floor:'ఫ్లోర్',walls:'గోడలు',view:'వ్యూ',gShort:'గ్రౌండ్',fShort:'ఫస్ట్',cutShort:'కట్ (లోపల చూడండి)',v3dShort:'3D',insideShort:'లోపల',topShort:'పైనుండి',walkHouse:'🚶 ఇంట్లో నడవండి',
+ wallPaint:'గోడ రంగు',pIn:'లోపల',pOut:'బయట',show:'చూపించు',furniture:'ఫర్నిచర్',walkway:'ఫస్ట్ ఫ్లోర్ చుట్టూ 3 అడుగుల నడక దారి',
+ Marble:'మార్బుల్',Granite:'గ్రానైట్','Natural stone':'సహజ రాయి',stone:'రాయి',colour:'రంగు',finish:'ఫినిష్',area:'విస్తీర్ణం',tiles:'టైల్స్',from:'ఎక్కడి నుండి',change:'ఈ గదికి రాయి మార్చండి',
+ sqft:'చ.అడుగులు',waste:'8% వృథాతో కలిపి',slabs:'స్లాబుల నుండి కొలతకు కట్',youIn:'మీరు ఉన్నది',stop:'■ నడక ఆపండి',hint:'గదిని ఎంచుకోవడానికి ఫ్లోర్‌పై నొక్కండి · తిప్పడానికి లాగండి · జూమ్ చేయండి',
+ padhint:'నడవడానికి & తిరగడానికి గుండ్రని స్టిక్‌ను నెట్టండి · చుట్టూ చూడటానికి స్క్రీన్‌ను లాగండి<br>ల్యాప్‌టాప్: యారో కీలు / W A S D',
+ drawn:'రాయి చిత్రం కంప్యూటర్‌తో గీసినది – అసలు నమూనా చూడండి',
+ living_dining:'లివింగ్ & డైనింగ్',hall:'హాల్',bedroom:'పడకగది',kitchen:'వంటగది',store:'స్టోర్ రూమ్',service:'సర్వీస్ ఏరియా',puja:'పూజ గది',toilet:'టాయిలెట్',living_area:'లివింగ్ ఏరియా',lobby:'లాబీ',balcony:'బాల్కనీ',work_area:'వర్క్ ఏరియా',staircase:'మెట్లు',platform:'వంటగది ప్లాట్‌ఫారం'},
+hi:{title:'घर का फ़र्श पत्थर प्लानर',sub:'ग्राउंड + फर्स्ट फ्लोर 3D में · कमरा चुनें, फिर पत्थर और रंग चुनें',options:'☰ विकल्प',optTitle:'विकल्प',
+ gf:'ग्राउंड फ्लोर',ff:'फर्स्ट फ्लोर',both:'पूरा घर',cut:'दीवारें कटी (अंदर देखें)',full:'पूरी दीवारें',v3d:'3D व्यू',inside:'कमरे के अंदर',top:'ऊपर से प्लान',outside:'बाहर',walk:'🚶 चलें',
+ tRoom:'1 कमरा',tStone:'2 पत्थर',tColour:'3 रंग',tView:'4 व्यू',hRoom:'1 · कमरा चुनें',hStone:'2 · पत्थर –',hColour:'3 · रंग',hFinish:'फिनिश',
+ f_polished:'पॉलिश',f_honed:'मैट',f_natural:'नेचुरल / फिसलन-रोधी',applyFloor:'इस फ्लोर के सभी कमरों में लगाएँ',applyHouse:'पूरे घर में लगाएँ',done:'✓ हो गया – 3D में दिखाएँ',
+ floor:'फ्लोर',walls:'दीवारें',view:'व्यू',gShort:'ग्राउंड',fShort:'फर्स्ट',cutShort:'कटी (अंदर देखें)',v3dShort:'3D',insideShort:'अंदर',topShort:'ऊपर से',walkHouse:'🚶 घर में घूमें',
+ wallPaint:'दीवार का रंग',pIn:'अंदर',pOut:'बाहर',show:'दिखाएँ',furniture:'फर्नीचर',walkway:'फर्स्ट फ्लोर के चारों ओर 3 फुट रास्ता',
+ Marble:'संगमरमर',Granite:'ग्रेनाइट','Natural stone':'प्राकृतिक पत्थर',stone:'पत्थर',colour:'रंग',finish:'फिनिश',area:'क्षेत्रफल',tiles:'टाइलें',from:'कहाँ से',change:'इस कमरे का पत्थर बदलें',
+ sqft:'वर्ग फुट',waste:'8% बर्बादी सहित',slabs:'स्लैब से नाप में कटाई',youIn:'आप यहाँ हैं',stop:'■ चलना बंद करें',hint:'कमरा चुनने के लिए फ़र्श पर टैप करें · घुमाने के लिए खींचें · ज़ूम करें',
+ padhint:'चलने और मुड़ने के लिए गोल स्टिक दबाएँ · चारों ओर देखने के लिए स्क्रीन खींचें<br>लैपटॉप: एरो कीज़ / W A S D',
+ drawn:'पत्थर की तस्वीर कंप्यूटर से बनी है – असली नमूना देखें',
+ living_dining:'लिविंग और डाइनिंग',hall:'हॉल',bedroom:'बेडरूम',kitchen:'रसोई',store:'स्टोर रूम',service:'सर्विस एरिया',puja:'पूजा घर',toilet:'टॉयलेट',living_area:'लिविंग एरिया',lobby:'लॉबी',balcony:'बालकनी',work_area:'वर्क एरिया',staircase:'सीढ़ियाँ',platform:'किचन प्लेटफ़ॉर्म'},
+kn:{title:'ಮನೆ ನೆಲದ ಕಲ್ಲು ಯೋಜಕ',sub:'ನೆಲ + ಮೊದಲ ಮಹಡಿ 3D ಯಲ್ಲಿ · ಕೋಣೆ ಆಯ್ಕೆಮಾಡಿ, ನಂತರ ಕಲ್ಲು ಮತ್ತು ಬಣ್ಣ ಆರಿಸಿ',options:'☰ ಆಯ್ಕೆಗಳು',optTitle:'ಆಯ್ಕೆಗಳು',
+ gf:'ನೆಲ ಮಹಡಿ',ff:'ಮೊದಲ ಮಹಡಿ',both:'ಇಡೀ ಮನೆ',cut:'ಗೋಡೆ ಕತ್ತರಿಸಿ (ಒಳಗೆ ನೋಡಿ)',full:'ಪೂರ್ಣ ಗೋಡೆಗಳು',v3d:'3D ನೋಟ',inside:'ಕೋಣೆಯ ಒಳಗೆ',top:'ಮೇಲಿನ ನಕ್ಷೆ',outside:'ಹೊರಗೆ',walk:'🚶 ನಡೆಯಿರಿ',
+ tRoom:'1 ಕೋಣೆ',tStone:'2 ಕಲ್ಲು',tColour:'3 ಬಣ್ಣ',tView:'4 ನೋಟ',hRoom:'1 · ಕೋಣೆ ಆಯ್ಕೆಮಾಡಿ',hStone:'2 · ಕಲ್ಲು –',hColour:'3 · ಬಣ್ಣ',hFinish:'ಫಿನಿಶ್',
+ f_polished:'ಪಾಲಿಶ್',f_honed:'ಮ್ಯಾಟ್',f_natural:'ನೈಸರ್ಗಿಕ / ಜಾರದ',applyFloor:'ಈ ಮಹಡಿಯ ಎಲ್ಲ ಕೋಣೆಗಳಿಗೆ ಬಳಸಿ',applyHouse:'ಇಡೀ ಮನೆಗೆ ಬಳಸಿ',done:'✓ ಆಯಿತು – 3D ಯಲ್ಲಿ ತೋರಿಸಿ',
+ floor:'ಮಹಡಿ',walls:'ಗೋಡೆಗಳು',view:'ನೋಟ',gShort:'ನೆಲ',fShort:'ಮೊದಲ',cutShort:'ಕತ್ತರಿಸಿ (ಒಳಗೆ)',v3dShort:'3D',insideShort:'ಒಳಗೆ',topShort:'ಮೇಲೆ',walkHouse:'🚶 ಮನೆಯಲ್ಲಿ ನಡೆಯಿರಿ',
+ wallPaint:'ಗೋಡೆ ಬಣ್ಣ',pIn:'ಒಳಗೆ',pOut:'ಹೊರಗೆ',show:'ತೋರಿಸಿ',furniture:'ಪೀಠೋಪಕರಣ',walkway:'ಮೊದಲ ಮಹಡಿ ಸುತ್ತ 3 ಅಡಿ ದಾರಿ',
+ Marble:'ಅಮೃತಶಿಲೆ',Granite:'ಗ್ರಾನೈಟ್','Natural stone':'ನೈಸರ್ಗಿಕ ಕಲ್ಲು',stone:'ಕಲ್ಲು',colour:'ಬಣ್ಣ',finish:'ಫಿನಿಶ್',area:'ವಿಸ್ತೀರ್ಣ',tiles:'ಟೈಲ್ಸ್',from:'ಎಲ್ಲಿಂದ',change:'ಈ ಕೋಣೆಯ ಕಲ್ಲು ಬದಲಿಸಿ',
+ sqft:'ಚ.ಅಡಿ',waste:'8% ವ್ಯರ್ಥ ಸೇರಿ',slabs:'ಸ್ಲ್ಯಾಬ್‌ನಿಂದ ಅಳತೆಗೆ ಕತ್ತರಿಸಿ',youIn:'ನೀವು ಇರುವುದು',stop:'■ ನಡಿಗೆ ನಿಲ್ಲಿಸಿ',hint:'ಕೋಣೆ ಆಯ್ಕೆಗೆ ನೆಲದ ಮೇಲೆ ಟ್ಯಾಪ್ ಮಾಡಿ · ತಿರುಗಿಸಲು ಎಳೆಯಿರಿ · ಜೂಮ್ ಮಾಡಿ',
+ padhint:'ನಡೆಯಲು ಮತ್ತು ತಿರುಗಲು ದುಂಡಗಿನ ಸ್ಟಿಕ್ ತಳ್ಳಿ · ಸುತ್ತ ನೋಡಲು ಪರದೆ ಎಳೆಯಿರಿ<br>ಲ್ಯಾಪ್‌ಟಾಪ್: ಬಾಣದ ಕೀಲಿಗಳು / W A S D',
+ drawn:'ಕಲ್ಲಿನ ಚಿತ್ರ ಕಂಪ್ಯೂಟರ್‌ನಿಂದ ರಚಿಸಲಾಗಿದೆ – ನಿಜವಾದ ಮಾದರಿ ನೋಡಿ',
+ living_dining:'ಲಿವಿಂಗ್ & ಡೈನಿಂಗ್',hall:'ಹಾಲ್',bedroom:'ಮಲಗುವ ಕೋಣೆ',kitchen:'ಅಡುಗೆಮನೆ',store:'ಸ್ಟೋರ್ ರೂಮ್',service:'ಸರ್ವೀಸ್ ಏರಿಯಾ',puja:'ದೇವರ ಕೋಣೆ',toilet:'ಶೌಚಾಲಯ',living_area:'ಲಿವಿಂಗ್ ಏರಿಯಾ',lobby:'ಲಾಬಿ',balcony:'ಬಾಲ್ಕನಿ',work_area:'ವರ್ಕ್ ಏರಿಯಾ',staircase:'ಮೆಟ್ಟಿಲುಗಳು',platform:'ಅಡುಗೆ ಕಟ್ಟೆ'},
+ta:{title:'வீட்டு தரை கல் திட்டமிடுபவர்',sub:'தரைத்தளம் + முதல் தளம் 3D-யில் · அறையைத் தேர்ந்தெடுத்து, கல் மற்றும் நிறத்தைத் தேர்வு செய்யவும்',options:'☰ விருப்பங்கள்',optTitle:'விருப்பங்கள்',
+ gf:'தரைத்தளம்',ff:'முதல் தளம்',both:'முழு வீடு',cut:'சுவர் வெட்டு (உள்ளே பார்க்க)',full:'முழு சுவர்கள்',v3d:'3D பார்வை',inside:'அறையின் உள்ளே',top:'மேலிருந்து வரைபடம்',outside:'வெளியே',walk:'🚶 நடக்க',
+ tRoom:'1 அறை',tStone:'2 கல்',tColour:'3 நிறம்',tView:'4 பார்வை',hRoom:'1 · அறையைத் தேர்ந்தெடுக்கவும்',hStone:'2 · கல் –',hColour:'3 · நிறம்',hFinish:'பினிஷ்',
+ f_polished:'பாலிஷ்',f_honed:'மேட்',f_natural:'இயற்கை / வழுக்காத',applyFloor:'இந்த தளத்தின் எல்லா அறைகளுக்கும்',applyHouse:'முழு வீட்டிற்கும்',done:'✓ முடிந்தது – 3D-யில் காட்டு',
+ floor:'தளம்',walls:'சுவர்கள்',view:'பார்வை',gShort:'தரை',fShort:'முதல்',cutShort:'வெட்டு (உள்ளே)',v3dShort:'3D',insideShort:'உள்ளே',topShort:'மேலே',walkHouse:'🚶 வீட்டில் நடக்க',
+ wallPaint:'சுவர் வண்ணம்',pIn:'உள்ளே',pOut:'வெளியே',show:'காட்டு',furniture:'மரச்சாமான்கள்',walkway:'முதல் தளத்தைச் சுற்றி 3 அடி நடைபாதை',
+ Marble:'பளிங்கு',Granite:'கிரானைட்','Natural stone':'இயற்கை கல்',stone:'கல்',colour:'நிறம்',finish:'பினிஷ்',area:'பரப்பளவு',tiles:'டைல்ஸ்',from:'எங்கிருந்து',change:'இந்த அறையின் கல்லை மாற்று',
+ sqft:'ச.அடி',waste:'8% வீணாவது உட்பட',slabs:'ஸ்லாப்களிலிருந்து அளவுக்கு வெட்டு',youIn:'நீங்கள் இருப்பது',stop:'■ நடப்பதை நிறுத்து',hint:'அறையைத் தேர்ந்தெடுக்க தரையைத் தொடவும் · சுழற்ற இழுக்கவும் · ஜூம் செய்யவும்',
+ padhint:'நடக்கவும் திரும்பவும் வட்ட ஸ்டிக்கைத் தள்ளவும் · சுற்றிப் பார்க்க திரையை இழுக்கவும்<br>லேப்டாப்: அம்பு விசைகள் / W A S D',
+ drawn:'கல் படம் கணினியால் வரையப்பட்டது – உண்மையான மாதிரியைப் பார்க்கவும்',
+ living_dining:'லிவிங் & டைனிங்',hall:'ஹால்',bedroom:'படுக்கையறை',kitchen:'சமையலறை',store:'ஸ்டோர் ரூம்',service:'சர்வீஸ் பகுதி',puja:'பூஜை அறை',toilet:'கழிப்பறை',living_area:'லிவிங் பகுதி',lobby:'லாபி',balcony:'பால்கனி',work_area:'வேலை பகுதி',staircase:'படிக்கட்டு',platform:'சமையல் மேடை'},
+};
+let LANG='en';try{const l=localStorage.getItem('stoneLang');if(l&&I18N[l])LANG=l;}catch(_){}
+const t=k=>(I18N[LANG]&&I18N[LANG][k])||I18N.en[k]||k;
+const ROOMKEY={g_living:['living_dining'],g_hall:['hall'],g_bed:['bedroom'],g_kitchen:['kitchen'],g_store:['store'],g_service:['service'],g_puja:['puja'],g_toilet:['toilet'],
+ f_living:['living_area'],f_lobby:['lobby'],f_bed1:['bedroom',1],f_bed2:['bedroom',2],f_bed3:['bedroom',3],f_balcony:['balcony'],
+ f_toilet1:['toilet',1,1],f_toilet2:['toilet',2,1],f_toilet3:['toilet',3,1],f_work1:['work_area',1],f_work2:['work_area',2],stairs:['staircase'],counter:['platform']};
+function rn(id){const k=ROOMKEY[id];if(!k)return ROOM[id].name;if(k[2])return`${t('toilet')} (${t('bedroom')} ${k[1]})`;return t(k[0])+(k[1]?' '+k[1]:'');}
+function applyLang(){
+  document.documentElement.lang=LANG;
+  document.querySelectorAll('[data-i18n]').forEach(e=>{e.textContent=t(e.dataset.i18n);});
+  document.querySelectorAll('[data-i18n-html]').forEach(e=>{e.innerHTML=t(e.dataset.i18nHtml);});
+  const sel=document.getElementById('lang');if(sel)sel.value=LANG;
+}
 
 /* ================= renderer / scene ================= */
 const canvas=document.getElementById('c');
@@ -827,9 +915,9 @@ function renderRooms(){
   const groups=[['Ground floor',0],['First floor',1]].filter(([,l])=>ui.mode==='both'||(ui.mode==='gf'?l===0:l===1));
   let html='';
   for(const [label,l] of groups){
-    html+=`<div class="group-label">${label}</div><div class="rooms">`;
+    html+=`<div class="group-label">${t(l?'ff':'gf')}</div><div class="rooms">`;
     const list=ROOMS.filter(r=>r.lvl===l||(r.id==='stairs'&&(l===0||ui.mode!=='both')));
-    for(const r of list){const s=surf[r.id];html+=`<button class="room ${ui.sel===r.id?'on':''}" data-id="${r.id}"><span class="sw" style="background-image:url(${swatch(s.stone,s.stone.v[s.vi])})"></span><span>${r.name}<small>${s.stone.name}</small></span></button>`;}
+    for(const r of list){const s=surf[r.id];html+=`<button class="room ${ui.sel===r.id?'on':''}" data-id="${r.id}"><span class="sw" style="background-image:url(${swatch(s.stone,s.stone.v[s.vi])})"></span><span>${rn(r.id)}<small>${s.stone.name}</small></span></button>`;}
     html+='</div>';
   }
   el.innerHTML=html;
@@ -838,7 +926,7 @@ document.getElementById('roomList').addEventListener('click',e=>{const b=e.targe
 function renderStones(){
   const el=document.getElementById('stoneList');let html='';
   for(const g of['Marble','Granite','Natural stone']){
-    html+=`<div class="group-label">${g}</div><div class="stones">`;
+    html+=`<div class="group-label">${t(g)}</div><div class="stones">`;
     for(const s of STONES.filter(s=>s.g===g))html+=`<button class="stone ${surf[ui.sel].stone.id===s.id?'on':''}" data-id="${s.id}"><span class="sw" style="background-image:url(${swatch(s,s.v[0])})"></span>${s.name}</button>`;
     html+='</div>';
   }
@@ -879,23 +967,24 @@ function tiles(id){const s=surf[id];const[tw,th]=s.stone.tile;return Math.ceil(a
 let cardMin=window.matchMedia('(max-width:860px)').matches;
 function renderCard(){
   const id=ui.sel,r=ROOM[id],s=surf[id],v=s.stone.v[s.vi];
-  const fl=id==='stairs'?'Ground → first floor':r.lvl===1?'First floor':'Ground floor';
-  document.getElementById('card').innerHTML=`<h2>${r.name}</h2><div class="sub">${fl} · ${r.size}</div>
-  <dl><dt>Stone</dt><dd>${s.stone.name}</dd><dt>Colour</dt><dd>${v.n}</dd><dt>Finish</dt><dd>${FINISH[s.finish].label}</dd>
-  <dt>Area</dt><dd>${areaOf(r).toFixed(1)} sq ft</dd>
-  <dt>${id==='stairs'||id==='counter'?'Slabs':'Tiles'}</dt><dd>${id==='stairs'||id==='counter'?'Cut to size from slabs':`${tiles(id)} × ${s.stone.tile[0]}×${s.stone.tile[1]} ft (incl. 8% waste)`}</dd>
-  <dt>From</dt><dd>${s.stone.origin}</dd></dl><button class="chg" id="chgStone">Change stone for this room</button><button class="mn" id="minCard" aria-label="Minimise">${cardMin?'▢':'—'}</button>`;
+  const fl=id==='stairs'?t('gf')+' → '+t('ff'):r.lvl===1?t('ff'):t('gf');
+  const slab=id==='stairs'||id==='counter';
+  document.getElementById('card').innerHTML=`<h2>${rn(id)}</h2><div class="sub">${fl} · ${r.size}</div>
+  <dl><dt>${t('stone')}</dt><dd>${s.stone.name}</dd><dt>${t('colour')}</dt><dd>${v.n}</dd><dt>${t('finish')}</dt><dd>${t('f_'+s.finish)}</dd>
+  <dt>${t('area')}</dt><dd>${areaOf(r).toFixed(1)} ${t('sqft')}</dd>
+  <dt>${t('tiles')}</dt><dd>${slab?t('slabs'):`${tiles(id)} × ${s.stone.tile[0]}×${s.stone.tile[1]} ft (${t('waste')})`}</dd>
+  <dt>${t('from')}</dt><dd>${s.stone.origin}</dd></dl><div class="drawn">${t('drawn')}</div><button class="chg" id="chgStone">${t('change')}</button><button class="mn" id="minCard" aria-label="Minimise">${cardMin?'▢':'—'}</button>`;
   document.getElementById('card').classList.toggle('min',cardMin);
-  document.getElementById('selLabel').textContent=r.name;
+  document.getElementById('selLabel').textContent=rn(id);
 }
 function renderFinish(){document.querySelectorAll('#finish button').forEach(b=>b.classList.toggle('on',b.dataset.f===surf[ui.sel].finish));}
 function renderSchedule(){
   let html='<tr><th>Floor</th><th>Room</th><th>Stone</th><th>Colour</th><th>Finish</th><th class="n">Area (sq ft)</th><th class="n">Tiles</th></tr>';
   const tot={};let sum=0;
   for(const r of ROOMS){const s=surf[r.id],v=s.stone.v[s.vi],a=areaOf(r);sum+=a;
-    const t=(r.id==='stairs'||r.id==='counter')?'slab':tiles(r.id);
-    const fl=r.id==='stairs'?'GF–FF':r.lvl===1?'First':'Ground';
-    html+=`<tr><td>${fl}</td><td>${r.name}</td><td><span class="mini"><span><i style="background-image:url(${swatch(s.stone,v)})"></i>${s.stone.name}</span></span></td><td>${v.n}</td><td>${FINISH[s.finish].label}</td><td class="n">${a.toFixed(1)}</td><td class="n">${t}</td></tr>`;
+    const tt=(r.id==='stairs'||r.id==='counter')?'slab':tiles(r.id);
+    const fl=r.id==='stairs'?t('gShort')+'–'+t('fShort'):r.lvl===1?t('fShort'):t('gShort');
+    html+=`<tr><td>${fl}</td><td>${rn(r.id)}</td><td><span class="mini"><span><i style="background-image:url(${swatch(s.stone,v)})"></i>${s.stone.name}</span></span></td><td>${v.n}</td><td>${t('f_'+s.finish)}</td><td class="n">${a.toFixed(1)}</td><td class="n">${tt}</td></tr>`;
     const k=s.stone.name+' – '+v.n;tot[k]=tot[k]||{a:0,s:s.stone,v};tot[k].a+=a;}
   html+=`<tr class="tot"><td colspan="5">Total stone area</td><td class="n">${sum.toFixed(1)}</td><td></td></tr>`;
   document.getElementById('schedule').innerHTML=html;
@@ -943,7 +1032,7 @@ function setSec(n){curSec=n;document.querySelectorAll('.sec').forEach(e=>e.class
 document.getElementById('stabs').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setSec(b.dataset.s);});
 document.getElementById('roomList').addEventListener('click',e=>{if(e.target.closest('.room')&&isPhone())setSec('stone');});
 document.getElementById('doneBtn').addEventListener('click',()=>{document.body.classList.remove('panel-open');setTimeout(()=>goView(ui.view==='walk'?'overview':ui.view),300);});
-function renderCur(){const id=ui.sel,s=surf[id],v=s.stone.v[s.vi];document.getElementById('curSel').innerHTML=`<span class="sw" style="background-image:url(${swatch(s.stone,v)})"></span><span><b>${ROOM[id].name}</b><small>${s.stone.name} · ${v.n} · ${FINISH[s.finish].label}</small></span>`;}
+function renderCur(){const id=ui.sel,s=surf[id],v=s.stone.v[s.vi];document.getElementById('curSel').innerHTML=`<span class="sw" style="background-image:url(${swatch(s.stone,v)})"></span><span><b>${rn(id)}</b><small>${s.stone.name} · ${v.n} · ${t('f_'+s.finish)}</small></span>`;}
 setSec('rooms');
 
 document.querySelectorAll('[data-p]').forEach(b=>b.addEventListener('click',()=>{const t=document.querySelector(b.dataset.p);if(!t)return;
@@ -1029,7 +1118,7 @@ function walkStep(dt){
   camera.lookAt(eye.x-Math.sin(walk.yaw)*Math.cos(walk.pitch),eye.y+Math.sin(walk.pitch),eye.z-Math.cos(walk.yaw)*Math.cos(walk.pitch));
   walkLight.position.set(walk.x,walk.y+9.5,walk.z);
   const r=roomAt(walk.x,walk.z,walk.y);
-  if(r&&r!==walk.room){walk.room=r;ui.sel=r;ui.mode=walk.y>5.7?'ff':'gf';syncSeg();renderAll();document.getElementById('where').textContent=`You are in: ${ROOM[r].name}${r==='stairs'?'':ROOM[r].lvl?' · First floor':' · Ground floor'}`;}
+  if(r&&r!==walk.room){walk.room=r;ui.sel=r;ui.mode=walk.y>5.7?'ff':'gf';syncSeg();renderAll();document.getElementById('where').textContent=`${t('youIn')}: ${rn(r)}${r==='stairs'?'':' · '+(ROOM[r].lvl?t('ff'):t('gf'))}`;}
 }
 const KEYMAP={ArrowUp:'up',KeyW:'up',ArrowDown:'down',KeyS:'down',ArrowLeft:'left',ArrowRight:'right',KeyA:'sl',KeyD:'sr',ShiftLeft:'shift',ShiftRight:'shift'};
 window.addEventListener('keydown',e=>{if(!walk.on)return;if(e.code==='Escape'){stopWalk();return;}const k=KEYMAP[e.code];if(k){walk.keys[k]=true;e.preventDefault();}});
@@ -1058,7 +1147,9 @@ function loop(now){
   controls.update();renderer.render(scene,camera);requestAnimationFrame(loop);
 }
 for(const r of ROOMS)applySurface(r.id);
-renderPaints();renderStoneTable();
+{const sel=document.getElementById('lang');sel.innerHTML=Object.entries(LANGS).map(([k,n])=>`<option value="${k}">${n}</option>`).join('');
+ sel.addEventListener('change',()=>{LANG=sel.value;try{localStorage.setItem('stoneLang',LANG);}catch(_){}applyLang();renderAll();});}
+applyLang();renderPaints();renderStoneTable();
 resize();select('g_living');goView('overview',true);requestAnimationFrame(loop);
 
 </script>
