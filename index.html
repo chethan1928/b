@@ -94,6 +94,8 @@ body.walking .pad{display:flex}body.walking .hint{display:none}
 body.walking .where{display:block}
 .stabs{display:none}
 .phoneOnly{display:none}
+.walkTop{display:none;border:0;background:var(--accent);color:#fff;border-radius:9px;padding:7px 12px;font:600 12.5px Inter,sans-serif;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+body.walking .walkTop{display:none!important}
 .cur{display:flex;align-items:center;gap:10px;background:var(--accent-soft);border-radius:10px;padding:8px 10px;margin:4px 0 8px;font-size:13px}
 .cur .sw{width:30px;height:30px}
 .cur small{display:block;color:var(--muted);font-size:11.5px}
@@ -105,6 +107,7 @@ body.walking .where{display:block}
   .sec{display:none}.sec.on{display:block}
   .phoneOnly{display:block}
   .bar #wallSeg,.bar #viewSeg{display:none}
+  .walkTop{display:inline-block}
   .walkbtn{background:var(--accent)}
   .sec h3:first-child{margin-top:6px}
   .done{display:block}
@@ -156,6 +159,7 @@ body.walking .where{display:block}
         <button data-m="ff">First floor</button>
         <button data-m="both">Whole house</button>
       </div>
+      <button class="walkTop" data-p="#viewSeg [data-v=walk]">🚶 Walk</button>
       <div class="seg" id="wallSeg">
         <button data-w="cut">Walls cut (see inside)</button>
         <button data-w="full">Full walls</button>
@@ -938,7 +942,6 @@ let curSec='rooms';
 function setSec(n){curSec=n;document.querySelectorAll('.sec').forEach(e=>e.classList.toggle('on',e.dataset.sec===n));document.querySelectorAll('#stabs button').forEach(b=>b.classList.toggle('on',b.dataset.s===n));document.getElementById('panel').scrollTop=0;}
 document.getElementById('stabs').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setSec(b.dataset.s);});
 document.getElementById('roomList').addEventListener('click',e=>{if(e.target.closest('.room')&&isPhone())setSec('stone');});
-document.getElementById('stoneList').addEventListener('click',e=>{if(e.target.closest('.stone')&&isPhone())setSec('colour');});
 document.getElementById('doneBtn').addEventListener('click',()=>{document.body.classList.remove('panel-open');setTimeout(()=>goView(ui.view==='walk'?'overview':ui.view),300);});
 function renderCur(){const id=ui.sel,s=surf[id],v=s.stone.v[s.vi];document.getElementById('curSel').innerHTML=`<span class="sw" style="background-image:url(${swatch(s.stone,v)})"></span><span><b>${ROOM[id].name}</b><small>${s.stone.name} · ${v.n} · ${FINISH[s.finish].label}</small></span>`;}
 setSec('rooms');
